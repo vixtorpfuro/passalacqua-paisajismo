@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const categories = [
   "TODOS",
@@ -125,7 +126,7 @@ export default function ProyectosPage() {
 
       {/* Featured project */}
       {featured && (activeCategory === "TODOS" || activeCategory === featured.category) && (
-        <div style={{ padding: "20px 24px 20px" }}>
+        <AnimatedSection delay={0} style={{ padding: "20px 24px 20px" }}>
           <div style={{
             display: "grid",
             gridTemplateColumns: "58fr 42fr",
@@ -169,7 +170,7 @@ export default function ProyectosPage() {
               </p>
             </div>
           </div>
-        </div>
+        </AnimatedSection>
       )}
 
       {/* Projects grid */}
@@ -181,9 +182,9 @@ export default function ProyectosPage() {
             gap: "12px",
           }}
         >
-          {filteredGrid.map((project) => (
+          {filteredGrid.map((project, i) => (
+            <AnimatedSection key={project.id} delay={i * 80}>
             <Link
-              key={project.id}
               href={`/proyectos/${project.id}`}
               style={{ textDecoration: "none", display: "block" }}
             >
@@ -209,6 +210,7 @@ export default function ProyectosPage() {
                 </div>
               </div>
             </Link>
+            </AnimatedSection>
           ))}
         </div>
       </div>
