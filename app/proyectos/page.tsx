@@ -124,59 +124,83 @@ export default function ProyectosPage() {
 
       {/* Featured project */}
       {featured && (activeCategory === "TODOS" || activeCategory === featured.category) && (
-        <div className="flex" style={{ minHeight: "500px" }}>
-          {/* Image */}
-          <div className="flex-1" style={{ maxWidth: "60%" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "58% 42%", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
+          {/* Image — fills the cell */}
+          <div style={{ overflow: "hidden", height: "540px" }}>
             <img
               src={featured.image}
               alt={featured.name}
-              className="w-full h-full object-cover"
-              style={{ maxHeight: "560px" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
           </div>
-          {/* Text */}
+          {/* Text panel — second color, text anchored bottom-left */}
           <div
-            className="flex-1 flex flex-col justify-end p-12"
-            style={{ backgroundColor: "#f2ede8" }}
+            style={{
+              backgroundColor: "#ddd4c8",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              padding: "48px 52px",
+            }}
           >
             <h1
-              className="font-bold uppercase leading-tight mb-4"
-              style={{ fontSize: "2.5rem", color: "#2b2520" }}
+              style={{
+                fontSize: "2.8rem",
+                fontWeight: "700",
+                lineHeight: 1.05,
+                letterSpacing: "-0.01em",
+                color: "#2b2520",
+                textTransform: "uppercase",
+                marginBottom: "20px",
+              }}
             >
               {featured.name.split(" ").map((word, i) => (
-                <span key={i} className="block">
-                  {word}
-                </span>
+                <span key={i} style={{ display: "block" }}>{word}</span>
               ))}
             </h1>
-            <p className="text-sm leading-relaxed" style={{ color: "#2b2520", maxWidth: "360px" }}>
+            <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#2b2520", maxWidth: "340px" }}>
               {featured.description}
             </p>
           </div>
         </div>
       )}
 
-      {/* Projects grid */}
-      <div className="flex flex-wrap px-6 py-6 gap-0" style={{ borderTop: "1px solid rgba(43,37,32,0.1)" }}>
+      {/* Projects grid — sin padding lateral, al borde */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(5, 1fr)",
+          borderBottom: "1px solid rgba(43,37,32,0.12)",
+        }}
+      >
         {filteredGrid.map((project) => (
           <Link
             key={project.id}
             href={`/proyectos/${project.id}`}
-            className="group"
-            style={{ width: "20%", padding: "4px" }}
+            style={{
+              textDecoration: "none",
+              borderRight: "1px solid rgba(43,37,32,0.12)",
+              display: "block",
+            }}
           >
-            <div className="overflow-hidden" style={{ aspectRatio: "1/1.1" }}>
+            <div style={{ overflow: "hidden", aspectRatio: "1/1.1" }}>
               <img
                 src={project.image}
                 alt={project.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                  transition: "transform 0.5s",
+                }}
               />
             </div>
-            <div className="pt-2 pb-4">
-              <div className="text-sm font-semibold" style={{ color: "#2b2520" }}>
+            <div style={{ padding: "12px 16px 20px" }}>
+              <div style={{ fontSize: "13px", fontWeight: "600", color: "#2b2520" }}>
                 {project.name}
               </div>
-              <div className="text-xs mt-0.5" style={{ color: "rgba(43,37,32,0.6)" }}>
+              <div style={{ fontSize: "11px", marginTop: "3px", color: "rgba(43,37,32,0.55)" }}>
                 {project.location} · {project.year} · {project.type}
               </div>
             </div>
