@@ -94,6 +94,7 @@ export default function ProyectosPage() {
           display: "flex",
           alignItems: "center",
           overflowX: "auto",
+          borderTop: "1px solid rgba(43,37,32,0.15)",
           borderBottom: "1px solid rgba(43,37,32,0.15)",
         }}
       >
@@ -124,86 +125,92 @@ export default function ProyectosPage() {
 
       {/* Featured project */}
       {featured && (activeCategory === "TODOS" || activeCategory === featured.category) && (
-        <div style={{ display: "grid", gridTemplateColumns: "58% 42%", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
-          {/* Image — fills the cell */}
-          <div style={{ overflow: "hidden", height: "540px" }}>
-            <img
-              src={featured.image}
-              alt={featured.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
-          </div>
-          {/* Text panel — second color, text anchored bottom-left */}
-          <div
-            style={{
-              backgroundColor: "#ddd4c8",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end",
-              padding: "48px 52px",
-            }}
-          >
-            <h1
+        <div style={{ padding: "20px 24px 0" }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "58% 42%",
+            border: "1px solid rgba(43,37,32,0.12)",
+          }}>
+            {/* Image */}
+            <div style={{ overflow: "hidden", height: "460px" }}>
+              <img
+                src="/home/14-casa-via-roja@2x.webp"
+                alt={featured.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+            {/* Text panel */}
+            <div
               style={{
-                fontSize: "2.8rem",
-                fontWeight: "700",
-                lineHeight: 1.05,
-                letterSpacing: "-0.01em",
-                color: "#2b2520",
-                textTransform: "uppercase",
-                marginBottom: "20px",
+                backgroundColor: "#ddd4c8",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+                padding: "40px 44px",
               }}
             >
-              {featured.name.split(" ").map((word, i) => (
-                <span key={i} style={{ display: "block" }}>{word}</span>
-              ))}
-            </h1>
-            <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#2b2520", maxWidth: "340px" }}>
-              {featured.description}
-            </p>
+              <h1
+                style={{
+                  fontSize: "2.5rem",
+                  fontWeight: "700",
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.01em",
+                  color: "#2b2520",
+                  textTransform: "uppercase",
+                  marginBottom: "16px",
+                }}
+              >
+                {featured.name.split(" ").map((word, i) => (
+                  <span key={i} style={{ display: "block" }}>{word}</span>
+                ))}
+              </h1>
+              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#2b2520", maxWidth: "320px" }}>
+                {featured.description}
+              </p>
+            </div>
           </div>
         </div>
       )}
 
       {/* Projects grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gap: "1px",
-          backgroundColor: "rgba(43,37,32,0.12)",
-          borderTop: "1px solid rgba(43,37,32,0.12)",
-        }}
-      >
-        {filteredGrid.map((project) => (
-          <Link
-            key={project.id}
-            href={`/proyectos/${project.id}`}
-            style={{ textDecoration: "none", backgroundColor: "#f2ede8", display: "block" }}
-          >
-            <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
-              <img
-                src={project.image}
-                alt={project.name}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                  transition: "transform 0.5s",
-                }}
-              />
-            </div>
-            <div style={{ padding: "10px 14px 18px", backgroundColor: "#f2ede8" }}>
-              <div style={{ fontSize: "13px", fontWeight: "600", color: "#2b2520" }}>
-                {project.name}
+      <div style={{ padding: "20px 24px 24px" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(5, 1fr)",
+            gap: "12px",
+          }}
+        >
+          {filteredGrid.map((project) => (
+            <Link
+              key={project.id}
+              href={`/proyectos/${project.id}`}
+              style={{ textDecoration: "none", display: "block" }}
+            >
+              <div style={{ overflow: "hidden", aspectRatio: "3/4" }}>
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                    transition: "transform 0.5s",
+                  }}
+                />
               </div>
-              <div style={{ fontSize: "11px", marginTop: "3px", color: "rgba(43,37,32,0.55)" }}>
-                {project.location} · {project.year} · {project.type}
+              <div style={{ paddingTop: "10px", paddingBottom: "4px" }}>
+                <div style={{ fontSize: "13px", fontWeight: "600", color: "#2b2520" }}>
+                  {project.name}
+                </div>
+                <div style={{ fontSize: "11px", marginTop: "3px", color: "rgba(43,37,32,0.55)" }}>
+                  {project.location} · {project.year} · {project.type}
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
 
       <Footer />
