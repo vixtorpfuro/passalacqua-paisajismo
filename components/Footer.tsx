@@ -8,7 +8,7 @@ export default function Footer() {
           alignItems: "center",
           justifyContent: "center",
           gap: "32px",
-          padding: "28px 32px",
+          padding: "12px 32px",
           borderTop: "1px solid rgba(43,37,32,0.15)",
           borderBottom: "1px solid rgba(43,37,32,0.15)",
         }}
