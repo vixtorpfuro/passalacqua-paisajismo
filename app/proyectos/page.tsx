@@ -200,11 +200,11 @@ export default function ProyectosPage() {
                   }}
                 />
               </div>
-              <div style={{ paddingTop: "10px", paddingBottom: "4px" }}>
+              <div style={{ backgroundColor: "#ddd4c8", padding: "12px 14px 16px" }}>
                 <div style={{ fontSize: "13px", fontWeight: "600", color: "#2b2520" }}>
                   {project.name}
                 </div>
-                <div style={{ fontSize: "11px", marginTop: "3px", color: "rgba(43,37,32,0.55)" }}>
+                <div style={{ fontSize: "11px", marginTop: "3px", color: "rgba(43,37,32,0.65)" }}>
                   {project.location} · {project.year} · {project.type}
                 </div>
               </div>
