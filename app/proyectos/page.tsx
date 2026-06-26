@@ -125,7 +125,7 @@ export default function ProyectosPage() {
 
       {/* Featured project */}
       {featured && (activeCategory === "TODOS" || activeCategory === featured.category) && (
-        <div style={{ padding: "20px 24px 0" }}>
+        <div style={{ padding: "20px 24px 20px" }}>
           <div style={{
             display: "grid",
             gridTemplateColumns: "58% 42%",
