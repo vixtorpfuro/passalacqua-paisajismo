@@ -128,7 +128,7 @@ export default function ProyectosPage() {
         <div style={{ padding: "20px 24px 20px" }}>
           <div style={{
             display: "grid",
-            gridTemplateColumns: "58% 42%",
+            gridTemplateColumns: "58fr 42fr",
             gap: "16px",
           }}>
             {/* Image — llena su columna completamente */}
