@@ -129,11 +129,10 @@ export default function ProyectosPage() {
           <div style={{
             display: "grid",
             gridTemplateColumns: "58% 42%",
-            backgroundColor: "#ddd4c8",
-            border: "1px solid rgba(43,37,32,0.12)",
+            gap: "16px",
           }}>
-            {/* Image — con margen vertical para que el panel lo supere en altura */}
-            <div style={{ overflow: "hidden", margin: "24px 0 24px 0", height: "440px" }}>
+            {/* Image — llena su columna completamente */}
+            <div style={{ overflow: "hidden", height: "480px" }}>
               <img
                 src="/home/14-casa-via-roja@2x.webp"
                 alt={featured.name}
