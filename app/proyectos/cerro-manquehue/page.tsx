@@ -211,13 +211,13 @@ export default function CerroManquehue() {
         </div>
       </AnimatedSection>
 
-      {/* Night image full-bleed */}
+      {/* Full-bleed cierre */}
       <AnimatedSection delay={0}>
         <div style={{ width: "100%", height: "60vh", overflow: "hidden" }}>
           <img
-            src="/home/27.CASA-IRARRAZAVALCVRDSC_5730-131017@2x.webp"
+            src={cm("_MG_5240.jpg")}
             alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", display: "block" }}
           />
         </div>
       </AnimatedSection>
