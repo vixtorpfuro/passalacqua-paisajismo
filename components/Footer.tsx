@@ -1,26 +1,41 @@
 export default function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid rgba(43,37,32,0.15)", backgroundColor: "#f2ede8" }}>
+    <footer style={{ backgroundColor: "#f2ede8" }}>
       {/* Newsletter */}
-      <div className="flex items-center justify-center gap-8 py-6 px-8">
-        <span className="text-sm" style={{ color: "#2b2520" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "32px",
+          padding: "28px 32px",
+          borderTop: "1px solid rgba(43,37,32,0.15)",
+          borderBottom: "1px solid rgba(43,37,32,0.15)",
+        }}
+      >
+        <span style={{ fontSize: "14px", color: "#2b2520" }}>
           Suscribite al newsletter — contenido mensual de paisajismo y diseño.
         </span>
         <a
           href="/conecta"
-          className="text-xs tracking-widest font-bold px-6 py-3 transition-opacity hover:opacity-80"
-          style={{ backgroundColor: "#c8873a", color: "#f2ede8" }}
+          style={{
+            fontSize: "11px",
+            letterSpacing: "0.15em",
+            fontWeight: "700",
+            padding: "12px 24px",
+            backgroundColor: "#c8873a",
+            color: "#f2ede8",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+          }}
         >
           SUSCRIBIRME →
         </a>
       </div>
 
       {/* Bottom */}
-      <div
-        className="flex items-center px-8 py-4"
-        style={{ borderTop: "1px solid rgba(43,37,32,0.1)" }}
-      >
-        <span className="text-xs tracking-widest" style={{ color: "rgba(43,37,32,0.5)" }}>
+      <div style={{ padding: "20px 32px" }}>
+        <span style={{ fontSize: "11px", letterSpacing: "0.12em", color: "rgba(43,37,32,0.5)" }}>
           PASSALACQUA PAISAJISMO · passalacquapaisajismo.cl
         </span>
       </div>

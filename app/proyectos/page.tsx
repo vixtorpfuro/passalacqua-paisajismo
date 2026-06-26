@@ -106,7 +106,7 @@ export default function ProyectosPage() {
               fontSize: "11px",
               letterSpacing: "0.15em",
               fontWeight: "500",
-              padding: "14px 24px",
+              padding: "10px 20px",
               whiteSpace: "nowrap",
               color: activeCategory === cat ? "#c8873a" : "#2b2520",
               borderBottom: activeCategory === cat ? "2px solid #c8873a" : "2px solid transparent",
@@ -129,7 +129,9 @@ export default function ProyectosPage() {
           <div style={{
             display: "grid",
             gridTemplateColumns: "58% 42%",
+            gap: "16px",
             border: "1px solid rgba(43,37,32,0.12)",
+            backgroundColor: "#ddd4c8",
           }}>
             {/* Image */}
             <div style={{ overflow: "hidden", height: "460px" }}>
