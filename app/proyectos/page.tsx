@@ -131,8 +131,8 @@ export default function ProyectosPage() {
             gridTemplateColumns: "58fr 42fr",
             gap: "16px",
           }}>
-            {/* Image — llena su columna completamente */}
-            <div style={{ overflow: "hidden", height: "480px" }}>
+            {/* Image */}
+            <div style={{ overflow: "hidden", height: "360px" }}>
               <img
                 src="/home/14-casa-via-roja@2x.webp"
                 alt={featured.name}
@@ -146,25 +146,25 @@ export default function ProyectosPage() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-end",
-                padding: "40px 44px",
+                padding: "24px",
               }}
             >
               <h1
                 style={{
-                  fontSize: "2.5rem",
+                  fontSize: "2.2rem",
                   fontWeight: "700",
-                  lineHeight: 1.05,
+                  lineHeight: 1.0,
                   letterSpacing: "-0.01em",
                   color: "#2b2520",
                   textTransform: "uppercase",
-                  marginBottom: "16px",
+                  marginBottom: "12px",
                 }}
               >
                 {featured.name.split(" ").map((word, i) => (
                   <span key={i} style={{ display: "block" }}>{word}</span>
                 ))}
               </h1>
-              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#2b2520", maxWidth: "320px" }}>
+              <p style={{ fontSize: "13px", lineHeight: 1.65, color: "#2b2520" }}>
                 {featured.description}
               </p>
             </div>
