@@ -22,7 +22,7 @@ const projects = [
     year: "2016",
     type: "Residencial Costero",
     category: "RESIDENCIAL",
-    image: "/home/27.CASA-IRARRAZAVALCVRDSC_5730-131017@2x.webp",
+    image: "/proyectos/cerro-manquehue/_MGL6063.jpg",
     featured: true,
     description:
       "Un jardín en las laderas del cerro Manquehue que integra la vegetación nativa con especies mediterráneas, creando espacios de contemplación y bienestar.",
@@ -61,7 +61,7 @@ const projects = [
     year: "2016",
     type: "Residencial Costero",
     category: "RESIDENCIAL",
-    image: "/home/27.CASA-IRARRAZAVALCVRDSC_7287-210218@2x.webp",
+    image: "/proyectos/cerro-manquehue/_MGL6017.jpg",
   },
   {
     id: "falabella",
