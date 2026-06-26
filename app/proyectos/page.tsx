@@ -132,7 +132,7 @@ export default function ProyectosPage() {
             gap: "16px",
           }}>
             {/* Image */}
-            <div style={{ overflow: "hidden", height: "360px" }}>
+            <div style={{ overflow: "hidden", height: "480px" }}>
               <img
                 src="/home/14-casa-via-roja@2x.webp"
                 alt={featured.name}
