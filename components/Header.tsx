@@ -13,20 +13,18 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  void isHome; // always use solid style
 
-  const textColor = isHome ? "#f2ede8" : "#2b2520";
-  const subtleColor = isHome ? "rgba(242,237,232,0.7)" : "rgba(43,37,32,0.55)";
+  const textColor = "#2b2520";
+  const subtleColor = "rgba(43,37,32,0.55)";
 
   return (
     <header
       style={{
-        position: isHome ? "absolute" : "relative",
-        top: 0,
-        left: 0,
-        right: 0,
+        position: "relative",
         zIndex: 50,
-        backgroundColor: isHome ? "transparent" : "#f2ede8",
-        borderBottom: isHome ? "none" : "1px solid rgba(43,37,32,0.12)",
+        backgroundColor: "#f2ede8",
+        borderBottom: "1px solid rgba(43,37,32,0.12)",
       }}
     >
       <div
@@ -39,24 +37,13 @@ export default function Header() {
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
+        <Link href="/" style={{ textDecoration: "none", display: "block", minWidth: "220px", height: "52px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/Logo_web@3x.png"
             alt="Passalacqua Paisajismo"
-            style={{ width: "44px", height: "44px", objectFit: "contain" }}
+            style={{ display: "block", height: "52px", maxWidth: "none", width: "auto" }}
           />
-          <div>
-            <div style={{ fontSize: "13px", fontWeight: "700", letterSpacing: "0.15em", color: textColor, lineHeight: 1.2 }}>
-              PASSALACQUA
-            </div>
-            <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: textColor, lineHeight: 1.2 }}>
-              PAISAJISMO
-            </div>
-            <div style={{ fontSize: "10px", fontStyle: "italic", color: subtleColor, marginTop: "1px" }}>
-              Wellbeing a través del paisaje.
-            </div>
-          </div>
         </Link>
 
         {/* Nav */}
@@ -105,7 +92,7 @@ export default function Header() {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "4px",
-                backgroundColor: isHome ? "rgba(43,37,32,0.6)" : "#2b2520",
+                backgroundColor: "#2b2520",
                 color: "#f2ede8",
                 textDecoration: "none",
               }}
@@ -125,8 +112,8 @@ export default function Header() {
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "50%",
-                border: `2px solid ${isHome ? "#f2ede8" : "#2b2520"}`,
-                color: textColor,
+                border: "2px solid #2b2520",
+                color: "#2b2520",
                 textDecoration: "none",
               }}
             >
