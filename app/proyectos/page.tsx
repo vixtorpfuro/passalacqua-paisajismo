@@ -165,25 +165,23 @@ export default function ProyectosPage() {
         </div>
       )}
 
-      {/* Projects grid — sin padding lateral, al borde */}
+      {/* Projects grid */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(5, 1fr)",
-          borderBottom: "1px solid rgba(43,37,32,0.12)",
+          gap: "1px",
+          backgroundColor: "rgba(43,37,32,0.12)",
+          borderTop: "1px solid rgba(43,37,32,0.12)",
         }}
       >
         {filteredGrid.map((project) => (
           <Link
             key={project.id}
             href={`/proyectos/${project.id}`}
-            style={{
-              textDecoration: "none",
-              borderRight: "1px solid rgba(43,37,32,0.12)",
-              display: "block",
-            }}
+            style={{ textDecoration: "none", backgroundColor: "#f2ede8", display: "block" }}
           >
-            <div style={{ overflow: "hidden", aspectRatio: "1/1.1" }}>
+            <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
               <img
                 src={project.image}
                 alt={project.name}
@@ -196,7 +194,7 @@ export default function ProyectosPage() {
                 }}
               />
             </div>
-            <div style={{ padding: "12px 16px 20px" }}>
+            <div style={{ padding: "10px 14px 18px", backgroundColor: "#f2ede8" }}>
               <div style={{ fontSize: "13px", fontWeight: "600", color: "#2b2520" }}>
                 {project.name}
               </div>
