@@ -125,16 +125,15 @@ export default function ProyectosPage() {
 
       {/* Featured project */}
       {featured && (activeCategory === "TODOS" || activeCategory === featured.category) && (
-        <div style={{ padding: "20px 24px 20px" }}>
+        <div style={{ padding: "20px 24px 0" }}>
           <div style={{
             display: "grid",
             gridTemplateColumns: "58% 42%",
-            gap: "16px",
-            border: "1px solid rgba(43,37,32,0.12)",
             backgroundColor: "#ddd4c8",
+            border: "1px solid rgba(43,37,32,0.12)",
           }}>
-            {/* Image */}
-            <div style={{ overflow: "hidden", height: "460px" }}>
+            {/* Image — con margen vertical para que el panel lo supere en altura */}
+            <div style={{ overflow: "hidden", margin: "24px 0 24px 0", height: "440px" }}>
               <img
                 src="/home/14-casa-via-roja@2x.webp"
                 alt={featured.name}
