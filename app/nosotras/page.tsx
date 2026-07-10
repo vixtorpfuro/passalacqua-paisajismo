@@ -41,34 +41,38 @@ const proceso = [
 ];
 
 export default function NosotrasPage() {
-  const [openProceso, setOpenProceso] = useState<number | null>(0);
+  const [openProceso, setOpenProceso] = useState<number | null>(null);
 
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
 
-      {/* Hero */}
-      <div style={{ width: "100%", height: "80vh", overflow: "hidden" }}>
-        <img
-          src="/nosotras/nosotras.png"
-          alt="Passalacqua Paisajismo"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 70%", display: "block" }}
-        />
-      </div>
-
-      {/* Frase + intro */}
+      {/* Hero: imagen completa + texto al lado */}
       <AnimatedSection delay={0}>
         <div style={{
           display: "grid",
-          gridTemplateColumns: "1fr 2fr",
-          gap: "48px",
-          padding: "60px 24px",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "0",
           borderBottom: "1px solid rgba(43,37,32,0.12)",
         }}>
-          <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", paddingTop: "6px" }}>
-            NOSOTRAS
+          {/* Imagen completa sin recorte */}
+          <div style={{ padding: "24px 12px 24px 24px" }}>
+            <img
+              src="/nosotras/nosotras.png"
+              alt="Pía y Josefina Passalacqua"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
           </div>
-          <div>
+          {/* Texto */}
+          <div style={{
+            padding: "60px 24px 60px 36px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}>
+            <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", marginBottom: "24px" }}>
+              NOSOTRAS
+            </div>
             <h1 style={{
               fontSize: "2.6rem",
               fontWeight: "700",
@@ -80,10 +84,10 @@ export default function NosotrasPage() {
             }}>
               El paisaje<br />como origen.
             </h1>
-            <p style={{ fontSize: "1.05rem", lineHeight: 1.75, color: "#2b2520", maxWidth: "600px", marginBottom: "20px" }}>
+            <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "#2b2520", marginBottom: "20px" }}>
               Somos un estudio de paisajismo fundado en Santiago de Chile con la convicción de que un jardín bien diseñado transforma la manera en que habitamos los espacios. Trabajamos en residencias, edificios corporativos, hoteles y azoteas, siempre desde una mirada que integra la naturaleza del lugar, el clima y las personas que lo van a vivir.
             </p>
-            <p style={{ fontSize: "1.05rem", lineHeight: 1.75, color: "#2b2520", maxWidth: "600px" }}>
+            <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "#2b2520" }}>
               Cada proyecto comienza con la escucha: del terreno, del entorno, del cliente. A partir de ahí construimos jardines que no se imponen sobre el paisaje, sino que se convierten en parte de él.
             </p>
           </div>

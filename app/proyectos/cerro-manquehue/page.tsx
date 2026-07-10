@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import Link from "next/link";
 
-const cm = (f: string) => `/proyectos/cerro-manquehue/${f}`;
+const cm = (f: string) => `/proyectos/${encodeURIComponent("01 cerro-manquehue")}/${encodeURIComponent(f)}`;
 
 export default function CerroManquehue() {
   return (
@@ -199,7 +199,7 @@ export default function CerroManquehue() {
           gap: "16px",
           padding: "16px 24px 24px",
         }}>
-          {[cm("_MG_5240.jpg"), cm("_MGL6017.jpg"), cm("_MGL5962.png")].map((src, i) => (
+          {[cm("_MG_5240.jpg"), cm("_MGL6017.jpg"), cm("_MGL5962.jpg")].map((src, i) => (
             <div key={i} style={{ overflow: "hidden", aspectRatio: "3/4" }}>
               <img
                 src={src}

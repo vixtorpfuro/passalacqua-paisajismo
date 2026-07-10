@@ -155,7 +155,7 @@ export default function MarketPage() {
           <div style={{
             backgroundColor: "rgba(43,37,32,0.08)",
             display: "flex",
-            alignItems: "flex-end",
+            alignItems: "flex-start",
             padding: "20px",
             gridRow: "span 2",
           }}>
