@@ -52,7 +52,7 @@ export default function NosotrasPage() {
         <img
           src="/nosotras/nosotras.png"
           alt="Passalacqua Paisajismo"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", display: "block" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 70%", display: "block" }}
         />
       </div>
 
