@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/nosotras", label: "NOSOTRAS" },
   { href: "/servicios", label: "SERVICIOS" },
   { href: "/market", label: "MARKET" },
+  { href: "/blog", label: "BLOG" },
 ];
 
 export default function Header() {
@@ -37,12 +38,12 @@ export default function Header() {
         }}
       >
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none", display: "block", minWidth: "220px", height: "52px" }}>
+        <Link href="/" style={{ textDecoration: "none", display: "block", minWidth: "176px", height: "42px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/Logo_web@3x.png"
             alt="Passalacqua Paisajismo"
-            style={{ display: "block", height: "52px", maxWidth: "none", width: "auto" }}
+            style={{ display: "block", height: "42px", maxWidth: "none", width: "auto" }}
           />
         </Link>
 
@@ -102,7 +103,7 @@ export default function Header() {
               </svg>
             </a>
             <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/passalacquapaisajismo"
               target="_blank"
               rel="noopener noreferrer"
               style={{

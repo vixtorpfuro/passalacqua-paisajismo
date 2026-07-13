@@ -51,7 +51,7 @@ const servicios = [
   { id: "hoteleria",    label: "Hotelería",               angle: 315, texto: "Jardines para hoteles, lodges y centros de descanso. Experiencias de naturaleza que se convierten en parte del servicio." },
   { id: "azoteas",      label: "Azoteas y Terrazas",      angle: 270, texto: "Diseño de jardines en altura para terrazas, azoteas y balcones. Soluciones técnicas adaptadas a cada estructura y clima." },
   { id: "mantenimiento", label: "Supervisión y Mantenimiento", angle: 225, texto: "Acompañamiento continuo del jardín en el tiempo. Planes de mantención, riego, poda y seguimiento estacional para que el proyecto crezca tal como fue concebido." },
-  { id: "ejecutivo",    label: "Proyecto Ejecutivo",      angle: 180, texto: "Documentación técnica completa para la ejecución de obras: especificaciones, detalles constructivos y presupuestos." },
+  { id: "ejecutivo",    label: "Asesorías en Paisaje",    angle: 180, texto: "Consultoría y asesoría en paisajismo para proyectos en distintas etapas: selección de plantas, revisión de diseños, orientación técnica y recomendaciones personalizadas." },
   { id: "supervision",  label: "Supervisión de Obras",    angle: 135, texto: "Acompañamiento en terreno durante la ejecución del proyecto. Control de calidad, coordinación de contratistas y seguimiento." },
 ];
 

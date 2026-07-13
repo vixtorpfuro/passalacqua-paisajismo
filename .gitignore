@@ -33,7 +33,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Fotos de proyectos — se hospedan en Sanity, no en git
+# Fotos — se hospedan en Sanity, no en git
 /public/proyectos/
 /public/wellbeing/
 /public/nosotras/
+/public/blog/
