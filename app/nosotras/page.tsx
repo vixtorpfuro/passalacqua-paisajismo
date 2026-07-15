@@ -6,12 +6,12 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 const founders = [
   {
-    img: "/nosotras/pia.png",
+    img: "/nosotras/pia.jpg",
     name: "Pía Passalacqua",
     role: "Socia Fundadora",
   },
   {
-    img: "/nosotras/josefina.png",
+    img: "/nosotras/josefina.jpg",
     name: "Josefina Passalacqua",
     role: "Socia Fundadora",
   },
@@ -53,7 +53,7 @@ export default function NosotrasPage() {
           {/* Imagen completa sin recorte */}
           <div style={{ padding: "24px 12px 24px 24px" }}>
             <img
-              src="/nosotras/nosotras.png"
+              src="/nosotras/nosotras.jpg"
               alt="Pía y Josefina Passalacqua"
               style={{ width: "100%", height: "auto", display: "block" }}
             />
@@ -142,7 +142,7 @@ export default function NosotrasPage() {
           </div>
           <div style={{ overflow: "hidden", width: "100%", aspectRatio: "16/7" }}>
             <img
-              src="/nosotras/equipo.png"
+              src="/nosotras/equipo.jpg"
               alt="Equipo Passalacqua Paisajismo"
               style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", display: "block" }}
             />
