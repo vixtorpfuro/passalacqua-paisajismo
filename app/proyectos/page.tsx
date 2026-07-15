@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
@@ -10,14 +10,38 @@ function img(folder: string, file: string) {
   return `/proyectos/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
 }
 
-const featured = {
-  id: "cerro-manquehue",
-  name: "Cerro Manquehue",
-  folder: "01 cerro-manquehue",
-  image: img("01 cerro-manquehue", "_MGL6063.jpg"),
-  description:
-    "Un jardín en las laderas del cerro Manquehue que integra la vegetación nativa con especies mediterráneas, creando espacios de contemplación y bienestar.",
-};
+const featuredList = [
+  {
+    id: "cerro-manquehue",
+    name: "Cerro Manquehue",
+    image: img("01 cerro-manquehue", "_MGL6063.jpg"),
+    description: "Un jardín en las laderas del cerro Manquehue que integra la vegetación nativa con especies mediterráneas, creando espacios de contemplación y bienestar.",
+  },
+  {
+    id: "margo",
+    name: "Margo",
+    image: img("02 margo", "1.jpg"),
+    description: "Proyecto de paisajismo interior-exterior para el Restaurante Margo. Jardines que conviven con la arquitectura y crean una atmósfera donde la naturaleza está presente en cada mesa.",
+  },
+  {
+    id: "antumalal",
+    name: "Jardín Antumalal",
+    image: img("02 JARDIN ANTUMALAL", "IMG_8808.JPEG"),
+    description: "Jardín en entorno lacustre que dialoga con el paisaje nativo de la Araucanía. Vegetación local integrada con espacios de contemplación y descanso.",
+  },
+  {
+    id: "gracia-cariola",
+    name: "Jardín Gracia Cariola",
+    image: img("02 JARDIN GRACIA CARIOLA", "_MGL5962.jpg"),
+    description: "Jardín residencial de diseño contemporáneo con paleta vegetal mediterránea. Espacios exteriores que extienden la vida interior hacia el jardín.",
+  },
+  {
+    id: "ranco",
+    name: "Jardín Ranco",
+    image: img("02 JARDIN RANCO", "Foto 28-09-25, 16 59 48.jpg"),
+    description: "Proyecto en las orillas del lago Ranco que integra la vegetación nativa del sur de Chile con espacios de encuentro y contemplación del paisaje lacustre.",
+  },
+];
 
 const secondary = [
   { id: "margo",               name: "Margo",               folder: "02 margo",               image: img("02 margo", "1.jpg") },
@@ -115,26 +139,53 @@ function ProjectCard({ name, image, href, aspect = "3/4" }: { name: string; imag
 }
 
 export default function ProyectosPage() {
+  const [featuredIdx, setFeaturedIdx] = useState(0);
+  const [fading, setFading] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const goTo = (idx: number) => {
+    if (idx === featuredIdx) return;
+    setFading(true);
+    setTimeout(() => {
+      setFeaturedIdx(idx);
+      setFading(false);
+    }, 400);
+  };
+
+  useEffect(() => {
+    timerRef.current = setTimeout(() => {
+      goTo((featuredIdx + 1) % featuredList.length);
+    }, 5000);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [featuredIdx]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const featured = featuredList[featuredIdx];
+
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
 
-      {/* Hero proyecto principal */}
+      {/* Hero proyecto principal — rotativo */}
       <AnimatedSection delay={0}>
         <div style={{ padding: "24px 24px 0" }}>
           <Link href={`/proyectos/${featured.id}`} style={{ textDecoration: "none", display: "block" }}>
             <div className="grid-hero">
-              <div style={{ overflow: "hidden", height: "520px" }}>
+              <div style={{ overflow: "hidden", height: "520px", position: "relative" }}>
                 <img
+                  key={featured.id}
                   src={featured.image}
                   alt={featured.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  style={{
+                    width: "100%", height: "100%", objectFit: "cover", display: "block",
+                    opacity: fading ? 0 : 1,
+                    transition: "opacity 0.4s ease",
+                  }}
                 />
               </div>
               <div style={{
                 backgroundColor: "#ddd4c8",
                 display: "flex", flexDirection: "column", justifyContent: "flex-end",
-                padding: "32px",
+                padding: "32px", position: "relative",
               }}>
                 <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", marginBottom: "16px" }}>
                   PROYECTO DESTACADO
@@ -143,12 +194,29 @@ export default function ProyectosPage() {
                   fontSize: "2.6rem", fontWeight: "700", lineHeight: 1.0,
                   letterSpacing: "-0.01em", color: "#2b2520", textTransform: "uppercase",
                   marginBottom: "16px",
+                  opacity: fading ? 0 : 1, transition: "opacity 0.4s ease",
                 }}>
                   {featured.name.split(" ").map((w, i) => <span key={i} style={{ display: "block" }}>{w}</span>)}
                 </h1>
-                <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#2b2520" }}>
+                <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#2b2520", marginBottom: "28px", opacity: fading ? 0 : 1, transition: "opacity 0.4s ease" }}>
                   {featured.description}
                 </p>
+                {/* Dots */}
+                <div style={{ display: "flex", gap: "8px" }} onClick={(e) => e.preventDefault()}>
+                  {featuredList.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={(e) => { e.preventDefault(); goTo(i); }}
+                      style={{
+                        width: i === featuredIdx ? "24px" : "8px",
+                        height: "8px", borderRadius: "4px",
+                        backgroundColor: i === featuredIdx ? "#c8873a" : "rgba(43,37,32,0.25)",
+                        border: "none", cursor: "pointer", padding: 0,
+                        transition: "all 0.3s ease",
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </Link>
