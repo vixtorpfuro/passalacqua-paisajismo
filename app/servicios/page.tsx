@@ -80,7 +80,7 @@ export default function ServiciosPage() {
 
       {/* Intro */}
       <AnimatedSection delay={0}>
-        <div style={{ padding: "60px 24px", borderBottom: "1px solid rgba(43,37,32,0.12)", display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "48px", alignItems: "center" }}>
+        <div className="grid-servicios" style={{ padding: "60px 24px", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
           <div>
             <h1 style={{
               fontSize: "2.4rem", fontWeight: "700", lineHeight: 1.05,

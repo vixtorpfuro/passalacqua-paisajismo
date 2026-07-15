@@ -141,7 +141,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
     return (
       <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
         <Header />
-        <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", minHeight: "calc(100vh - 73px)" }}>
+        <div className="grid-blog" style={{ minHeight: "calc(100vh - 73px)" }}>
           <Sidebar items={sidebarItems} activeId={id} />
           <PostContent
             title={captionToTitle(post.caption)}
@@ -167,7 +167,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
-      <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", minHeight: "calc(100vh - 73px)" }}>
+      <div className="grid-blog" style={{ minHeight: "calc(100vh - 73px)" }}>
         <Sidebar items={sidebarItems} activeId={id} />
         <PostContent title={post.title} image={post.image} timestamp={post.timestamp} body={post.body} />
       </div>

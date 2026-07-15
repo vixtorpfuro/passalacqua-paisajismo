@@ -22,7 +22,7 @@ export default async function BlogPage() {
       <Header />
 
       <div style={{ padding: "24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "6px" }}>
+        <div className="grid-4col">
           {/* Label */}
           <div style={{
             backgroundColor: "rgba(43,37,32,0.08)",

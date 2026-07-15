@@ -123,7 +123,7 @@ export default function ProyectosPage() {
       <AnimatedSection delay={0}>
         <div style={{ padding: "24px 24px 0" }}>
           <Link href={`/proyectos/${featured.id}`} style={{ textDecoration: "none", display: "block" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "58fr 42fr", gap: "8px" }}>
+            <div className="grid-hero">
               <div style={{ overflow: "hidden", height: "520px" }}>
                 <img
                   src={featured.image}
@@ -158,7 +158,7 @@ export default function ProyectosPage() {
       {/* Proyectos secundarios — 3 col */}
       <AnimatedSection delay={50}>
         <div style={{ padding: "8px 24px 0" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
+          <div className="grid-3col">
             {secondary.map((p) => (
               <ProjectCard key={p.id} name={p.name} image={p.image} href={`/proyectos/${p.id}`} aspect="4/3" />
             ))}
@@ -172,7 +172,7 @@ export default function ProyectosPage() {
           <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.45)", margin: "24px 0 16px" }}>
             MÁS PROYECTOS
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "8px" }}>
+          <div className="grid-5col">
             {rest.map((p) => (
               <ProjectCard key={p.id} name={p.name} image={p.image} href={`/proyectos/${p.id}`} aspect="3/4" />
             ))}

@@ -49,12 +49,7 @@ export default function NosotrasPage() {
 
       {/* Hero: imagen completa + texto al lado */}
       <AnimatedSection delay={0}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "0",
-          borderBottom: "1px solid rgba(43,37,32,0.12)",
-        }}>
+        <div className="grid-2col-eq" style={{ borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
           {/* Imagen completa sin recorte */}
           <div style={{ padding: "24px 12px 24px 24px" }}>
             <img
@@ -96,13 +91,7 @@ export default function NosotrasPage() {
 
       {/* Fundadoras */}
       <AnimatedSection delay={0}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "0",
-          borderTop: "1px solid rgba(43,37,32,0.12)",
-          borderBottom: "1px solid rgba(43,37,32,0.12)",
-        }}>
+        <div className="grid-2col-eq" style={{ borderTop: "1px solid rgba(43,37,32,0.12)", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
           {/* Fotos */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", padding: "24px 12px 24px 24px" }}>
             {founders.map((f, i) => (
@@ -163,12 +152,7 @@ export default function NosotrasPage() {
 
       {/* El proceso */}
       <AnimatedSection delay={0}>
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 2fr",
-          gap: "48px",
-          padding: "60px 24px 80px",
-        }}>
+        <div className="grid-2col" style={{ gap: "48px", padding: "60px 24px 80px" }}>
           <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", paddingTop: "6px" }}>
             EL PROCESO
           </div>

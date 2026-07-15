@@ -55,13 +55,7 @@ export default function ConectaPage() {
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 2fr",
-        gap: "0",
-        minHeight: "calc(100vh - 73px)",
-        borderBottom: "1px solid rgba(43,37,32,0.12)",
-      }}>
+      <div className="grid-2col" style={{ minHeight: "calc(100vh - 73px)", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
 
         {/* Columna izquierda */}
         <div style={{
@@ -162,7 +156,7 @@ export default function ConectaPage() {
           <form onSubmit={(e) => e.preventDefault()} style={{ display: "flex", flexDirection: "column", gap: "0" }}>
 
             {/* Nombre + Email */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "20px" }}>
+            <div className="grid-form-2col">
               <div>
                 <label style={labelStyle}>NOMBRE</label>
                 <input placeholder="Tu nombre" style={inputStyle} />
