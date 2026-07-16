@@ -14,31 +14,31 @@ const featuredList = [
   {
     id: "cerro-manquehue",
     name: "Cerro Manquehue",
-    image: img("01 cerro-manquehue", "_MGL6063.jpg"),
+    image: "https://cdn.sanity.io/images/kcbpv06c/production/3dc5d776e2ff5227e928e36941d8b91cce77ebde-1920x1280.jpg",
     description: "Un jardín en las laderas del cerro Manquehue que integra la vegetación nativa con especies mediterráneas, creando espacios de contemplación y bienestar.",
   },
   {
     id: "margo",
     name: "Margo",
-    image: img("02 margo", "1.jpg"),
+    image: "https://cdn.sanity.io/images/kcbpv06c/production/65ec906115215db8405261728e010cacfd4923f2-2400x1600.jpg",
     description: "Proyecto de paisajismo interior-exterior para el Restaurante Margo. Jardines que conviven con la arquitectura y crean una atmósfera donde la naturaleza está presente en cada mesa.",
   },
   {
     id: "antumalal",
     name: "Jardín Antumalal",
-    image: img("02 JARDIN ANTUMALAL", "IMG_8808.JPEG"),
+    image: "https://cdn.sanity.io/images/kcbpv06c/production/95bcee5f0bcab7591ae7069fe793e87d1e38c776-1536x2048.jpg",
     description: "Jardín en entorno lacustre que dialoga con el paisaje nativo de la Araucanía. Vegetación local integrada con espacios de contemplación y descanso.",
   },
   {
     id: "gracia-cariola",
     name: "Jardín Gracia Cariola",
-    image: img("02 JARDIN GRACIA CARIOLA", "_MGL5962.jpg"),
+    image: "https://cdn.sanity.io/images/kcbpv06c/production/08b04cc13521f9d954c69af51673e68e87bacb30-2400x1600.jpg",
     description: "Jardín residencial de diseño contemporáneo con paleta vegetal mediterránea. Espacios exteriores que extienden la vida interior hacia el jardín.",
   },
   {
     id: "ranco",
     name: "Jardín Ranco",
-    image: img("02 JARDIN RANCO", "Foto 28-09-25, 16 59 48.jpg"),
+    image: "https://cdn.sanity.io/images/kcbpv06c/production/d69eca812a3d5b9a78557fcb67859cb8b55963a3-2400x1800.jpg",
     description: "Proyecto en las orillas del lago Ranco que integra la vegetación nativa del sur de Chile con espacios de encuentro y contemplación del paisaje lacustre.",
   },
 ];
