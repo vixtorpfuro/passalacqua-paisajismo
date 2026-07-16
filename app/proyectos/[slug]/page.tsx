@@ -5,15 +5,17 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { proyectosMap } from "@/lib/proyectos-data";
+import { sanityImagesByFolder } from "@/lib/sanity-images";
 
 const MAX_IMAGES = 40;
 const VALID_EXT = /\.(jpg|jpeg|png|webp)$/i;
 
 function getImages(folder: string, subfolder?: string): string[] {
+  // 1. Intentar desde filesystem local (desarrollo)
   const base = path.join(process.cwd(), "public", "proyectos", folder);
   const dir = subfolder ? path.join(base, subfolder) : base;
   try {
-    return fs
+    const local = fs
       .readdirSync(dir)
       .filter((f) => VALID_EXT.test(f))
       .sort()
@@ -22,9 +24,12 @@ function getImages(folder: string, subfolder?: string): string[] {
         const rel = subfolder ? `${folder}/${subfolder}/${f}` : `${folder}/${f}`;
         return `/proyectos/${rel.split("/").map(encodeURIComponent).join("/")}`;
       });
-  } catch {
-    return [];
-  }
+    if (local.length > 0) return local;
+  } catch { /* no hay carpeta local */ }
+
+  // 2. Fallback a Sanity CDN
+  const key = subfolder ? `${folder}/${subfolder}` : folder;
+  return sanityImagesByFolder[key] ?? sanityImagesByFolder[folder] ?? [];
 }
 
 export default async function ProyectoPage({
