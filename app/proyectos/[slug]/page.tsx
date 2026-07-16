@@ -34,14 +34,10 @@ export default async function ProyectoPage({
 }) {
   const { slug } = await params;
 
-  if (slug === "cerro-manquehue") notFound();
-
   const proyecto = proyectosMap[slug];
   if (!proyecto) notFound();
 
   const images = getImages(proyecto.folder, proyecto.subfolder);
-  if (images.length === 0) notFound();
-
   const [hero, second, ...rest] = images;
 
   return (
