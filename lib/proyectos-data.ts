@@ -9,6 +9,15 @@ export type Proyecto = {
 };
 
 export const proyectosMap: Record<string, Proyecto> = {
+  // ── 01 ─────────────────────────────────────────────────────────────────────
+  "cerro-manquehue": {
+    name: "Cerro Manquehue",
+    folder: "01 cerro-manquehue",
+    location: "Santiago",
+    year: "2023",
+    type: "Residencial",
+    description: "Un jardín en las laderas del cerro Manquehue que integra la vegetación nativa con especies mediterráneas, creando espacios de contemplación y bienestar.",
+  },
   // ── 02 ─────────────────────────────────────────────────────────────────────
   "margo": {
     name: "Margo",
