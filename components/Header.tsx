@@ -58,7 +58,7 @@ export default function Header() {
         </nav>
 
         {/* Mobile: CONECTA + hamburger */}
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }} className="show-mobile-flex">
+        <div style={{ alignItems: "center", gap: "16px" }} className="show-mobile-flex">
           <Link href="/conecta" style={{ fontSize: "11px", letterSpacing: "0.15em", fontWeight: "700", textDecoration: "none", color: "#c8873a" }}>
             CONECTA
           </Link>
