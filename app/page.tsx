@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 
 const slides = [
-  "/home/07-casa-via-roja@2x.webp",
-  "/home/27.CASA-IRARRAZAVALCVRDSC_5730-131017@2x.webp",
-  "/home/14-casa-via-roja@2x.webp",
-  "/home/27.CASA-IRARRAZAVALCVRDSC_7287-210218@2x.webp",
+  "/home/07-casa-via-roja@2x.jpg",
+  "/home/27.CASA-IRARRAZAVALCVRDSC_5730-131017@2x.jpg",
+  "/home/14-casa-via-roja@2x.jpg",
+  "/home/27.CASA-IRARRAZAVALCVRDSC_7287-210218@2x.jpg",
   "/home/garden-06.jpg",
 ];
 
