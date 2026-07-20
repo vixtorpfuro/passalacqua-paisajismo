@@ -1,9 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedCarousel from "./FeaturedCarousel";
-import ProjectCardClient from "./ProjectCardClient";
+import ProyectosGrid from "./ProyectosGrid";
 import { getAllProyectos, urlFor } from "@/lib/sanity-fetch";
 
 export const revalidate = 60;
@@ -34,11 +33,17 @@ export default async function ProyectosPage() {
 
   // El resto en orden, excluyendo los featured
   const featuredSet = new Set(FEATURED_SLUGS);
-  const rest = todos.filter((p) => !featuredSet.has(p.slug.current));
-
-  // Primeros 21 → grilla 3col; el resto → grilla 5col
-  const secondary = rest.slice(0, 21);
-  const more = rest.slice(21);
+  const rest = todos
+    .filter((p) => !featuredSet.has(p.slug.current))
+    .map((p) => ({
+      _id: p._id,
+      name: p.name,
+      slug: p.slug,
+      type: p.type,
+      coverUrl: p.coverImage
+        ? urlFor(p.coverImage).width(800).quality(82).url()
+        : "",
+    }));
 
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
@@ -53,52 +58,8 @@ export default async function ProyectosPage() {
         </AnimatedSection>
       )}
 
-      {/* Proyectos secundarios — 3 col */}
-      <AnimatedSection delay={50}>
-        <div style={{ padding: "8px 24px 0" }}>
-          <div className="grid-3col">
-            {secondary.map((p) => (
-              <ProjectCardClient
-                key={p._id}
-                name={p.name}
-                href={`/proyectos/${p.slug.current}`}
-                coverUrl={
-                  p.coverImage
-                    ? urlFor(p.coverImage).width(800).quality(82).url()
-                    : ""
-                }
-                aspect="4/3"
-              />
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* Más proyectos — 5 col */}
-      {more.length > 0 && (
-        <AnimatedSection delay={80}>
-          <div style={{ padding: "8px 24px 40px" }}>
-            <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.45)", margin: "24px 0 16px" }}>
-              MÁS PROYECTOS
-            </div>
-            <div className="grid-5col">
-              {more.map((p) => (
-                <ProjectCardClient
-                  key={p._id}
-                  name={p.name}
-                  href={`/proyectos/${p.slug.current}`}
-                  coverUrl={
-                    p.coverImage
-                      ? urlFor(p.coverImage).width(600).quality(82).url()
-                      : ""
-                  }
-                  aspect="3/4"
-                />
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
-      )}
+      {/* Filtros + grilla */}
+      <ProyectosGrid proyectos={rest} />
 
       <Footer />
     </div>
