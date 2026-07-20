@@ -4,17 +4,29 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 
+const W = {
+  wellbeing:   "https://cdn.sanity.io/images/kcbpv06c/production/2d3f74eff41e87fb535121d8f15b379499f533eb-1228x1623.png",
+  compartir:   "https://cdn.sanity.io/images/kcbpv06c/production/570eaa29c6cf80dbae7ecc082ca9226f0ed43cc7-1080x1920.png",
+  conectar:    "https://cdn.sanity.io/images/kcbpv06c/production/afccd41dd40b89ceb7aabb5d69bd4ec5e0433da4-1080x1920.png",
+  recorrer:    "https://cdn.sanity.io/images/kcbpv06c/production/591585c27e62c7818f4dba61feb580e999d43d82-1080x1920.png",
+  desconectar: "https://cdn.sanity.io/images/kcbpv06c/production/c772f087043a983752aab3aedc0857e2aa4867cb-1080x1920.png",
+  reunir:      "https://cdn.sanity.io/images/kcbpv06c/production/34d6600d682c01233a62e3047892247dbcd8e993-1080x1920.png",
+  resguardar:  "https://cdn.sanity.io/images/kcbpv06c/production/a9c074c58d9bc91b3bff533d16e8a146e9927fc1-1080x1920.png",
+  entretener:  "https://cdn.sanity.io/images/kcbpv06c/production/514f519f179612619d51c46f8a7a83c32c1f12e9-1080x1920.png",
+  jugar:       "https://cdn.sanity.io/images/kcbpv06c/production/891083058188c0a5b01db5227a6bf831db1e84da-1080x1920.png",
+};
+
 const paradas = [
-  { id: "paisajismo",   label: "PAISAJISMO",   image: "/wellbeing/wellbeing@3x.png",    side: "left"  as const, x: 80,  y: 80,  lx: 80,  ly: 60,  anchor: "middle" as const, texto: "El paisajismo es el arte de transformar un espacio exterior en una extensión viva de quien lo habita. No se trata solo de plantar — se trata de diseñar experiencias donde la naturaleza y la vida cotidiana se encuentran." },
-  { id: "compartir",   label: "COMPARTIR",    image: "/wellbeing/COMPARTIR@3Bx.png",   side: "right" as const, x: 500, y: 80,  lx: 500, ly: 60,  anchor: "middle" as const, texto: "Un jardín bien diseñado convoca. Genera los espacios para que las personas se reúnan, conversen y compartan momentos. La mesa bajo el árbol, el sendero que invita a caminar acompañado." },
-  { id: "conectar",    label: "CONECTAR",     image: "/wellbeing/CONECTAR.png",         side: "right" as const, x: 290, y: 195, lx: 290, ly: 175, anchor: "middle" as const, texto: "La naturaleza tiene una capacidad única de conectarnos con nosotros mismos. Caminar entre plantas, escuchar el agua, sentir el sol — son actos simples que restauran nuestra energía y nos devuelven al presente." },
-  { id: "recorrer",    label: "RECORRER",     image: "/wellbeing/recorrer.png",         side: "left"  as const, x: 80,  y: 310, lx: 80,  ly: 290, anchor: "middle" as const, texto: "Un jardín con recorrido es un jardín que se descubre. Diseñamos caminos que llevan de un espacio a otro, que generan expectativa y sorpresa, que hacen que cada visita sea una experiencia nueva." },
-  { id: "desconectar", label: "DESCONECTAR",  image: "/wellbeing/desconectar.png",      side: "right" as const, x: 500, y: 420, lx: 500, ly: 400, anchor: "middle" as const, texto: "El jardín es refugio. Un lugar donde el ruido del mundo se apaga y el ritmo de la naturaleza toma el control. Diseñamos rincones de calma donde la mente puede finalmente descansar." },
-  { id: "reunir",      label: "REUNIR",       image: "/wellbeing/REUNIR.png",           side: "right" as const, x: 310, y: 530, lx: 310, ly: 510, anchor: "middle" as const, texto: "Los espacios exteriores son los mejores anfitriones. Diseñamos jardines que facilitan el encuentro — con luz cálida, con sombra generosa, con lugares para sentarse que inviten a quedarse." },
-  { id: "resguardar",  label: "RESGUARDAR",   image: "/wellbeing/RESGUARDAR.png",       side: "left"  as const, x: 80,  y: 640, lx: 80,  ly: 620, anchor: "middle" as const, texto: "Proteger del viento, del sol intenso, de las miradas. El diseño de paisaje crea microclimas y límites naturales que hacen del jardín un espacio seguro y acogedor durante todo el año." },
-  { id: "entretener",  label: "ENTRETENER",   image: "/wellbeing/entretener.png",       side: "right" as const, x: 500, y: 740, lx: 500, ly: 720, anchor: "middle" as const, texto: "Un jardín vivo entretiene. El movimiento de las hojas, el canto de los pájaros, los colores que cambian con las estaciones — la naturaleza ofrece un espectáculo permanente y siempre renovado." },
-  { id: "wellbeing",   label: "WELLBEING",    image: "/wellbeing/wellbeing@3x.png",     side: "left"  as const, x: 120, y: 840, lx: 120, ly: 820, anchor: "middle" as const, texto: "Creemos que el paisaje es una extensión emocional de la arquitectura. Diseñamos jardines con intención, donde cada espacio te acompaña a sentir un bienestar profundo y cotidiano." },
-  { id: "jugar",       label: "JUGAR",        image: "/wellbeing/JUGAR.png",            side: "left"  as const, x: 290, y: 840, lx: 290, ly: 820, anchor: "middle" as const, texto: "El jardín también es lugar de juego — para los niños, para los adultos. Diseñar con juego en mente es diseñar para la alegría, para el movimiento, para el disfrute sin propósito." },
+  { id: "paisajismo",   label: "PAISAJISMO",   image: W.wellbeing,   side: "left"  as const, x: 80,  y: 80,  lx: 80,  ly: 60,  anchor: "middle" as const, texto: "El paisajismo es el arte de transformar un espacio exterior en una extensión viva de quien lo habita. No se trata solo de plantar — se trata de diseñar experiencias donde la naturaleza y la vida cotidiana se encuentran." },
+  { id: "compartir",   label: "COMPARTIR",    image: W.compartir,   side: "right" as const, x: 500, y: 80,  lx: 500, ly: 60,  anchor: "middle" as const, texto: "Un jardín bien diseñado convoca. Genera los espacios para que las personas se reúnan, conversen y compartan momentos. La mesa bajo el árbol, el sendero que invita a caminar acompañado." },
+  { id: "conectar",    label: "CONECTAR",     image: W.conectar,    side: "right" as const, x: 290, y: 195, lx: 290, ly: 175, anchor: "middle" as const, texto: "La naturaleza tiene una capacidad única de conectarnos con nosotros mismos. Caminar entre plantas, escuchar el agua, sentir el sol — son actos simples que restauran nuestra energía y nos devuelven al presente." },
+  { id: "recorrer",    label: "RECORRER",     image: W.recorrer,    side: "left"  as const, x: 80,  y: 310, lx: 80,  ly: 290, anchor: "middle" as const, texto: "Un jardín con recorrido es un jardín que se descubre. Diseñamos caminos que llevan de un espacio a otro, que generan expectativa y sorpresa, que hacen que cada visita sea una experiencia nueva." },
+  { id: "desconectar", label: "DESCONECTAR",  image: W.desconectar, side: "right" as const, x: 500, y: 420, lx: 500, ly: 400, anchor: "middle" as const, texto: "El jardín es refugio. Un lugar donde el ruido del mundo se apaga y el ritmo de la naturaleza toma el control. Diseñamos rincones de calma donde la mente puede finalmente descansar." },
+  { id: "reunir",      label: "REUNIR",       image: W.reunir,      side: "right" as const, x: 310, y: 530, lx: 310, ly: 510, anchor: "middle" as const, texto: "Los espacios exteriores son los mejores anfitriones. Diseñamos jardines que facilitan el encuentro — con luz cálida, con sombra generosa, con lugares para sentarse que inviten a quedarse." },
+  { id: "resguardar",  label: "RESGUARDAR",   image: W.resguardar,  side: "left"  as const, x: 80,  y: 640, lx: 80,  ly: 620, anchor: "middle" as const, texto: "Proteger del viento, del sol intenso, de las miradas. El diseño de paisaje crea microclimas y límites naturales que hacen del jardín un espacio seguro y acogedor durante todo el año." },
+  { id: "entretener",  label: "ENTRETENER",   image: W.entretener,  side: "right" as const, x: 500, y: 740, lx: 500, ly: 720, anchor: "middle" as const, texto: "Un jardín vivo entretiene. El movimiento de las hojas, el canto de los pájaros, los colores que cambian con las estaciones — la naturaleza ofrece un espectáculo permanente y siempre renovado." },
+  { id: "wellbeing",   label: "WELLBEING",    image: W.wellbeing,   side: "left"  as const, x: 120, y: 840, lx: 120, ly: 820, anchor: "middle" as const, texto: "Creemos que el paisaje es una extensión emocional de la arquitectura. Diseñamos jardines con intención, donde cada espacio te acompaña a sentir un bienestar profundo y cotidiano." },
+  { id: "jugar",       label: "JUGAR",        image: W.jugar,       side: "left"  as const, x: 290, y: 840, lx: 290, ly: 820, anchor: "middle" as const, texto: "El jardín también es lugar de juego — para los niños, para los adultos. Diseñar con juego en mente es diseñar para la alegría, para el movimiento, para el disfrute sin propósito." },
 ];
 
 // Snake path: serpentine going DOWN, curves on alternating sides
@@ -72,7 +84,7 @@ export default function WellbeingPage() {
         }}>
           <div style={{ overflow: "hidden", maxHeight: "500px" }}>
             <img
-              src="/wellbeing/wellbeing@3x.png"
+              src={W.wellbeing}
               alt="Wellbeing"
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
