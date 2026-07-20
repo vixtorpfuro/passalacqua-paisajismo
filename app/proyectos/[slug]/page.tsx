@@ -1,36 +1,10 @@
-import fs from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { proyectosMap } from "@/lib/proyectos-data";
-import { sanityImagesByFolder } from "@/lib/sanity-images";
+import { getProyecto, urlFor } from "@/lib/sanity-fetch";
 
-const MAX_IMAGES = 40;
-const VALID_EXT = /\.(jpg|jpeg|png|webp)$/i;
-
-function getImages(folder: string, subfolder?: string): string[] {
-  // 1. Intentar desde filesystem local (desarrollo)
-  const base = path.join(process.cwd(), "public", "proyectos", folder);
-  const dir = subfolder ? path.join(base, subfolder) : base;
-  try {
-    const local = fs
-      .readdirSync(dir)
-      .filter((f) => VALID_EXT.test(f))
-      .sort()
-      .slice(0, MAX_IMAGES)
-      .map((f) => {
-        const rel = subfolder ? `${folder}/${subfolder}/${f}` : `${folder}/${f}`;
-        return `/proyectos/${rel.split("/").map(encodeURIComponent).join("/")}`;
-      });
-    if (local.length > 0) return local;
-  } catch { /* no hay carpeta local */ }
-
-  // 2. Fallback a Sanity CDN
-  const key = subfolder ? `${folder}/${subfolder}` : folder;
-  return sanityImagesByFolder[key] ?? sanityImagesByFolder[folder] ?? [];
-}
+export const revalidate = 60;
 
 export default async function ProyectoPage({
   params,
@@ -38,25 +12,33 @@ export default async function ProyectoPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-
-  const proyecto = proyectosMap[slug];
+  const proyecto = await getProyecto(slug);
   if (!proyecto) notFound();
 
-  const images = getImages(proyecto.folder, proyecto.subfolder);
-  const [hero, second, ...rest] = images;
+  const coverUrl = proyecto.coverImage
+    ? urlFor(proyecto.coverImage).width(1920).quality(85).url()
+    : null;
+
+  const galleryUrls = (proyecto.images ?? []).map((img) =>
+    urlFor(img).width(1200).quality(82).url()
+  );
+
+  const [second, ...rest] = galleryUrls;
 
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
 
       {/* Hero */}
-      <div style={{ width: "100%", height: "80vh", overflow: "hidden" }}>
-        <img
-          src={hero}
-          alt={proyecto.name}
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", display: "block" }}
-        />
-      </div>
+      {coverUrl && (
+        <div style={{ width: "100%", height: "80vh", overflow: "hidden" }}>
+          <img
+            src={coverUrl}
+            alt={proyecto.name}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", display: "block" }}
+          />
+        </div>
+      )}
 
       {/* Título + metadata */}
       <div style={{
@@ -66,7 +48,6 @@ export default async function ProyectoPage({
         padding: "48px 24px 52px",
         borderBottom: "1px solid rgba(43,37,32,0.12)",
       }}>
-        {/* Metadata izquierda */}
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {proyecto.type && (
             <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", textTransform: "uppercase" }}>
@@ -88,7 +69,6 @@ export default async function ProyectoPage({
           </div>
         </div>
 
-        {/* Título + descripción derecha */}
         <div>
           <h1 style={{
             fontSize: "2.6rem", fontWeight: "700", lineHeight: 1.05,
@@ -110,14 +90,11 @@ export default async function ProyectoPage({
 
       {/* Galería */}
       <div style={{ padding: "16px 24px 60px" }}>
-        {/* Segunda imagen — ancha */}
         {second && (
           <div style={{ width: "100%", overflow: "hidden", aspectRatio: "16/7", marginBottom: "8px" }}>
             <img src={second} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
         )}
-
-        {/* Grid 3 columnas */}
         {rest.length > 0 && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
             {rest.map((src, i) => (

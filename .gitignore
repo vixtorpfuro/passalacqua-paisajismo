@@ -36,5 +36,8 @@ next-env.d.ts
 # Fotos — se hospedan en Sanity, no en git
 /public/proyectos/
 sanity-*.json
+/sanity-studio/node_modules/
+/sanity-studio/dist/
+/sanity-studio/.sanity/
 /public/wellbeing/
 /public/blog/
