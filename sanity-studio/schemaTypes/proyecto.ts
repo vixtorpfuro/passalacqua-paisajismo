@@ -58,12 +58,13 @@ export const proyectoType = defineType({
       type: 'string',
       options: {
         list: [
-          'Residencial',
-          'Residencial Costero',
-          'Residencial Lacustre',
           'Corporativo',
-          'Hotelería',
-          'Salud',
+          'Residencial',
+          'Hotelería y Entretenimiento',
+          'Azoteas y Terrazas',
+          'Casas Playa',
+          'Casas Sur',
+          'Inmobiliarias',
         ],
       },
     }),
