@@ -73,6 +73,7 @@ export default function WellbeingPage() {
 
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
+      <style>{`@keyframes fadeInPanel { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }`}</style>
       <Header />
 
       {/* Intro: imagen + texto */}
@@ -119,17 +120,18 @@ export default function WellbeingPage() {
             {/* Panel izquierdo — posicionado a la altura del nodo */}
             <div style={{ position: "relative", height: "100%" }}>
               {panelLeft && (
-                <div style={{
+                <div key={panelLeft.id} style={{
                   position: "absolute",
                   top: `min(${((panelLeft.y / 880) * 100).toFixed(1)}%, calc(100% - 580px))`,
                   transform: "translateY(0)",
                   width: "100%",
                   transition: "top 0.3s ease",
+                  animation: "fadeInPanel 0.35s ease",
                 }}>
                   <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#2b2520", marginBottom: "12px" }}>
                     {panelLeft.texto}
                   </p>
-                  <img src={panelLeft.image} alt={panelLeft.label}
+                  <img src={panelLeft.image} alt={panelLeft.label} loading="lazy"
                     style={{ width: "100%", height: "auto", maxHeight: "520px", objectFit: "contain", display: "block" }} />
                 </div>
               )}
@@ -185,17 +187,18 @@ export default function WellbeingPage() {
             {/* Panel derecho — posicionado a la altura del nodo */}
             <div style={{ position: "relative", height: "100%" }}>
               {panelRight && (
-                <div style={{
+                <div key={panelRight.id} style={{
                   position: "absolute",
                   top: `min(${((panelRight.y / 880) * 100).toFixed(1)}%, calc(100% - 580px))`,
                   transform: "translateY(0)",
                   width: "100%",
                   transition: "top 0.3s ease",
+                  animation: "fadeInPanel 0.35s ease",
                 }}>
                   <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#2b2520", marginBottom: "12px" }}>
                     {panelRight.texto}
                   </p>
-                  <img src={panelRight.image} alt={panelRight.label}
+                  <img src={panelRight.image} alt={panelRight.label} loading="lazy"
                     style={{ width: "100%", height: "auto", maxHeight: "520px", objectFit: "contain", display: "block" }} />
                 </div>
               )}

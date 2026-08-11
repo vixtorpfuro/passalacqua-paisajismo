@@ -152,45 +152,63 @@ export default function NosotrasPage() {
 
       {/* El proceso */}
       <AnimatedSection delay={0}>
-        <div className="grid-2col" style={{ gap: "48px", padding: "60px 24px 80px" }}>
-          <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", paddingTop: "6px" }}>
+        <style>{`@keyframes accordionOpen { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }`}</style>
+        <div style={{ padding: "60px 24px 16px" }}>
+          <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", marginBottom: "20px" }}>
             EL PROCESO
           </div>
-          <div>
-            {proceso.map((step, i) => (
-              <div key={i} style={{ borderTop: "1px solid rgba(43,37,32,0.15)" }}>
-                <button
-                  onClick={() => setOpenProceso(openProceso === i ? null : i)}
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "20px 0",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    textAlign: "left",
-                  }}
-                >
-                  <span style={{ fontSize: "15px", fontWeight: "600", color: "#2b2520", letterSpacing: "-0.01em" }}>
-                    {step.title}
-                  </span>
-                  <span style={{ fontSize: "20px", color: "#c8873a", lineHeight: 1, flexShrink: 0, marginLeft: "16px" }}>
-                    {openProceso === i ? "−" : "+"}
-                  </span>
-                </button>
-                {openProceso === i && (
-                  <div style={{ paddingBottom: "24px" }}>
-                    <p style={{ fontSize: "14px", lineHeight: 1.75, color: "#2b2520", maxWidth: "520px" }}>
-                      {step.body}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
-            <div style={{ borderTop: "1px solid rgba(43,37,32,0.15)" }} />
-          </div>
+          <h2 style={{
+            fontSize: "2rem",
+            fontWeight: "700",
+            lineHeight: 1.1,
+            color: "#2b2520",
+            textTransform: "uppercase",
+            letterSpacing: "-0.01em",
+            marginBottom: "48px",
+            maxWidth: "480px",
+          }}>
+            Cómo trabajamos
+          </h2>
+        </div>
+        <div style={{ padding: "0 24px 80px" }}>
+          {proceso.map((step, i) => (
+            <div key={i} style={{ borderTop: "1px solid rgba(43,37,32,0.15)" }}>
+              <button
+                onClick={() => setOpenProceso(openProceso === i ? null : i)}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "20px 0",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  textAlign: "left",
+                }}
+              >
+                <span style={{ fontSize: "15px", fontWeight: "600", color: "#2b2520", letterSpacing: "-0.01em" }}>
+                  {step.title}
+                </span>
+                <span style={{
+                  fontSize: "20px", color: "#c8873a", lineHeight: 1, flexShrink: 0, marginLeft: "16px",
+                  transition: "transform 0.25s ease",
+                  display: "inline-block",
+                  transform: openProceso === i ? "rotate(45deg)" : "rotate(0deg)",
+                }}>
+                  +
+                </span>
+              </button>
+              {openProceso === i && (
+                <div style={{ paddingBottom: "24px", animation: "accordionOpen 0.3s ease" }}>
+                  <p style={{ fontSize: "14px", lineHeight: 1.75, color: "#2b2520", maxWidth: "520px" }}>
+                    {step.body}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+          <div style={{ borderTop: "1px solid rgba(43,37,32,0.15)" }} />
         </div>
       </AnimatedSection>
 

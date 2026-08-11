@@ -9,11 +9,10 @@ export const revalidate = 60;
 
 // Slugs que aparecen en el carrusel destacado (en orden)
 const FEATURED_SLUGS = [
-  "cerro-manquehue",
-  "margo",
-  "antumalal",
-  "gracia-cariola",
-  "ranco",
+  "jardin-via-roja",
+  "restaurante-margo",
+  "los-vilos",
+  "falabella",
 ];
 
 export default async function ProyectosPage() {

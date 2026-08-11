@@ -3,9 +3,9 @@ import Footer from "@/components/Footer";
 import ProductCard from "./ProductCard";
 
 const marketProducts = [
-  { slug: "maceta-aire",        name: "Maceta Aire",        image: "/market/Passalacqua_01_home_A-6.png",  price: "$45.000" },
-  { slug: "set-suculentas",     name: "Set Suculentas",     image: "/market/Passalacqua_01_home_A-7.png",  price: "$32.000" },
-  { slug: "jardinera-ceramica", name: "Jardinera Cerámica", image: "/market/Passalacqua_01_home_A-8.png",  price: "$58.000" },
+  { slug: "maceta-aire",        name: "Maceta Aire",        image: "/market/Passalacqua_01_home_A-6.jpg",  price: "$45.000" },
+  { slug: "set-suculentas",     name: "Set Suculentas",     image: "/market/Passalacqua_01_home_A-7.jpg",  price: "$32.000" },
+  { slug: "jardinera-ceramica", name: "Jardinera Cerámica", image: "/market/Passalacqua_01_home_A-8.jpg",  price: "$58.000" },
 ];
 
 export default function MarketPage() {
