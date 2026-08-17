@@ -13,79 +13,75 @@ const products: Record<string, {
   images: string[];
   related: { slug: string; name: string; image: string }[];
 }> = {
-  "maceta-aire": {
-    name: "Maceta Aire",
-    subtitle: "Cerámica artesanal · Unidad",
-    price: "$45.000",
+  "macetero-chino": {
+    name: "Macetero Chino",
+    subtitle: "Cerámica pintada a mano · Unidad",
+    price: "Consultar",
     description:
-      "Maceta de cerámica de alta temperatura, fabricada artesanalmente en Chile. Su diseño limpio y proporciones equilibradas la hacen ideal para plantas de interior o terraza. Cada pieza es única y puede presentar pequeñas variaciones propias del proceso artesanal.",
+      "Macetero de cerámica estilo chino, pintado a mano con motivos tradicionales en azul y blanco. Ideal para plantas de gran formato: árboles, palmeras o alocasias. Una pieza de carácter que transforma cualquier espacio interior o exterior cubierto.",
     details: [
-      { label: "Material", value: "Cerámica de alta temperatura" },
-      { label: "Dimensiones", value: "Ø 18 cm × 20 cm alto" },
-      { label: "Origen", value: "Fabricado en Chile" },
-      { label: "Drenaje", value: "Con orificio inferior" },
-      { label: "Cuidado", value: "Limpiar con paño húmedo" },
+      { label: "Material", value: "Cerámica pintada a mano" },
+      { label: "Dimensiones", value: "Ø 69 cm × 49 cm alto" },
+      { label: "Uso", value: "Interior y exterior cubierto" },
+      { label: "Estilo", value: "Azul y blanco, motivos orientales" },
     ],
     images: [
-      "/market/Passalacqua_01_home_A-6.png",
-      "/market/Passalacqua_01_home_A-7.png",
-      "/market/Passalacqua_01_home_A-8.png",
+      "/market/macetero-chino.jpg",
+      "/market/macetero-chino2.jpg",
     ],
     related: [
-      { slug: "set-suculentas", name: "Set Suculentas", image: "/market/Passalacqua_01_home_A-7.png" },
-      { slug: "jardinera-ceramica", name: "Jardinera Cerámica", image: "/market/Passalacqua_01_home_A-8.png" },
+      { slug: "escultura-leon", name: "Escultura León", image: "/market/escultura-leon.jpg" },
+      { slug: "banca-cipres", name: "Banca Ciprés", image: "/market/banca-cipres.jpg" },
     ],
   },
-  "set-suculentas": {
-    name: "Set Suculentas",
-    subtitle: "Plantas · Set de 3",
-    price: "$32.000",
+  "escultura-leon": {
+    name: "Escultura León",
+    subtitle: "Hormigón · Unidad",
+    price: "$200.000",
     description:
-      "Set de tres suculentas seleccionadas por nuestro equipo, elegidas por su compatibilidad estética y sus requerimientos similares de agua y luz. Incluye instrucciones de cuidado y se entregan en macetas de barro natural.",
+      "Escultura de cabeza de león en hormigón, diseñada para instalarse en muros o fachadas. Su acabado envejecido le da un carácter clásico que combina perfectamente con paredes cubiertas de vegetación. Una pieza que añade personalidad y profundidad a cualquier jardín.",
     details: [
-      { label: "Contenido", value: "3 plantas + macetas de barro" },
-      { label: "Riego", value: "Cada 15–20 días" },
-      { label: "Luz", value: "Luz indirecta abundante" },
-      { label: "Interior / Exterior", value: "Interior" },
-      { label: "Incluye", value: "Guía de cuidado" },
+      { label: "Material", value: "Hormigón" },
+      { label: "Dimensiones", value: "25 × 25 cm" },
+      { label: "Instalación", value: "Muro o fachada" },
+      { label: "Uso", value: "Exterior" },
     ],
     images: [
-      "/market/Passalacqua_01_home_A-7.png",
-      "/market/Passalacqua_01_home_A-9.png",
-      "/market/Passalacqua_01_home_A-10.png",
+      "/market/escultura-leon.jpg",
+      "/market/escultura-leon2.jpg",
+      "/market/escultura-leon3.jpg",
     ],
     related: [
-      { slug: "maceta-aire", name: "Maceta Aire", image: "/market/Passalacqua_01_home_A-6.png" },
-      { slug: "jardinera-ceramica", name: "Jardinera Cerámica", image: "/market/Passalacqua_01_home_A-8.png" },
+      { slug: "macetero-chino", name: "Macetero Chino", image: "/market/macetero-chino.jpg" },
+      { slug: "banca-cipres", name: "Banca Ciprés", image: "/market/banca-cipres.jpg" },
     ],
   },
-  "jardinera-ceramica": {
-    name: "Jardinera Cerámica",
-    subtitle: "Cerámica artesanal · Unidad",
-    price: "$58.000",
+  "banca-cipres": {
+    name: "Banca Ciprés",
+    subtitle: "Madera de ciprés · Unidad",
+    price: "$560.000 + IVA",
     description:
-      "Jardinera de cerámica de formato rectangular, ideal para hierbas aromáticas, cactus o una composición de plantas pequeñas. Su acabado mate y tono natural encaja con cualquier espacio.",
+      "Banca de jardín fabricada en madera de ciprés, resistente a la intemperie y de larga durabilidad. Su diseño clásico con respaldo de tablillas y apoyabrazos curvos es atemporal — funciona igual en un jardín formal que en una terraza contemporánea.",
     details: [
-      { label: "Material", value: "Cerámica de alta temperatura" },
-      { label: "Dimensiones", value: "30 × 12 × 12 cm" },
-      { label: "Origen", value: "Fabricado en Chile" },
-      { label: "Drenaje", value: "Con orificio inferior" },
-      { label: "Cuidado", value: "Limpiar con paño húmedo" },
+      { label: "Material", value: "Madera de ciprés" },
+      { label: "Dimensiones", value: "160 cm largo × 50 cm prof. × 93 cm alto" },
+      { label: "Uso", value: "Exterior" },
+      { label: "Mantención", value: "Aplicar aceite para madera una vez al año" },
+      { label: "Precio", value: "$560.000 + IVA" },
     ],
     images: [
-      "/market/Passalacqua_01_home_A-8.png",
-      "/market/Passalacqua_01_home_A-12.png",
-      "/market/Passalacqua_01_home_A-6.png",
+      "/market/banca-cipres.jpg",
     ],
     related: [
-      { slug: "maceta-aire", name: "Maceta Aire", image: "/market/Passalacqua_01_home_A-6.png" },
-      { slug: "set-suculentas", name: "Set Suculentas", image: "/market/Passalacqua_01_home_A-7.png" },
+      { slug: "macetero-chino", name: "Macetero Chino", image: "/market/macetero-chino.jpg" },
+      { slug: "escultura-leon", name: "Escultura León", image: "/market/escultura-leon.jpg" },
     ],
   },
 };
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
-  const product = products[params.slug] ?? products["maceta-aire"];
+  const product = products[params.slug];
+  if (!product) return null;
   const [activeImg, setActiveImg] = useState(0);
   const [openDetail, setOpenDetail] = useState<string | null>(null);
 
