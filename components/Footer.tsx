@@ -4,6 +4,7 @@ import { useState } from "react";
 const WEBHOOK = "https://script.google.com/macros/s/AKfycbwXFmSJkC8o6j9a6EYWdItYyHdEKQJ1s1cLzQQRhHqQf3nuvuxotMiEPGKBnSaQ98NK/exec";
 
 function Newsletter() {
+  const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
 
@@ -16,9 +17,10 @@ function Newsletter() {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ nombre, email }),
       });
       setStatus("ok");
+      setNombre("");
       setEmail("");
     } catch {
       setStatus("error");
@@ -47,12 +49,18 @@ function Newsletter() {
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", gap: "0", alignItems: "stretch" }}>
       <input
+        placeholder="Tu nombre"
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)}
+        style={{ ...inputStyle, width: "160px", borderRight: "none" }}
+      />
+      <input
         type="email"
         placeholder="tu@email.com"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        style={{ ...inputStyle, width: "240px" }}
+        style={{ ...inputStyle, width: "210px" }}
       />
       <button
         type="submit"
