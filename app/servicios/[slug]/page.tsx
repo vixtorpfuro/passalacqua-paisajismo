@@ -138,7 +138,7 @@ export default async function ServicioPage({ params }: { params: { slug: string 
           SERVICIOS
         </div>
         <h1 style={{
-          fontSize: "clamp(2.4rem, 6vw, 4.5rem)",
+          fontSize: "2.4rem",
           fontWeight: "700",
           lineHeight: 1.0,
           color: "#2b2520",
