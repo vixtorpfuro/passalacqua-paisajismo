@@ -44,6 +44,33 @@ export async function getProyectosByType(type: string): Promise<SanityProyecto[]
   );
 }
 
+export type SanityPost = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  category: string;
+  coverImage?: { asset: { _ref: string } };
+  publishedAt: string;
+  body?: unknown[];
+};
+
+export async function getAllPosts(): Promise<SanityPost[]> {
+  return sanityClient.fetch(
+    `*[_type == "post"] | order(publishedAt desc) {
+      _id, title, slug, category, coverImage, publishedAt
+    }`
+  );
+}
+
+export async function getPost(slug: string): Promise<SanityPost | null> {
+  return sanityClient.fetch(
+    `*[_type == "post" && slug.current == $slug][0] {
+      _id, title, slug, category, coverImage, publishedAt, body
+    }`,
+    { slug }
+  );
+}
+
 export async function getProyecto(slug: string): Promise<SanityProyecto | null> {
   return sanityClient.fetch(
     `*[_type == "proyecto" && slug.current == $slug][0] {
