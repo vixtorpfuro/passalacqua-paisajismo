@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { getProyectosByType, urlFor } from "@/lib/sanity-fetch";
+import ProyectosGrid from "./ProyectosGrid";
 
 export const revalidate = 60;
 
@@ -185,39 +186,12 @@ export default async function ServicioPage({ params }: { params: { slug: string 
               PROYECTOS
             </div>
           </div>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-            gap: "8px",
-          }}>
-            {proyectosConFoto.map((p) => (
-              <Link key={p._id} href={`/proyectos/${p.slug.current}`} style={{ textDecoration: "none" }}>
-                <div style={{ overflow: "hidden", aspectRatio: "4/3", position: "relative" }}>
-                  <img
-                    src={urlFor(p.coverImage!).width(800).quality(82).url()}
-                    alt={p.name}
-                    loading="lazy"
-                    style={{
-                      width: "100%", height: "100%",
-                      objectFit: "cover", display: "block",
-                      transition: "transform 0.5s ease",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.04)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                  />
-                  <div style={{
-                    position: "absolute", bottom: 0, left: 0, right: 0,
-                    padding: "40px 16px 16px",
-                    background: "linear-gradient(to top, rgba(43,37,32,0.6) 0%, transparent 100%)",
-                  }}>
-                    <div style={{ fontSize: "13px", fontWeight: "600", color: "#f2ede8" }}>
-                      {p.name}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <ProyectosGrid proyectos={proyectosConFoto.map((p) => ({
+            _id: p._id,
+            name: p.name,
+            slug: p.slug,
+            coverUrl: urlFor(p.coverImage!).width(800).quality(82).url(),
+          }))} />
         </div>
       )}
 
