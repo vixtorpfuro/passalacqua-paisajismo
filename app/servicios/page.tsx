@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -45,14 +46,14 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 }
 
 const servicios = [
-  { id: "diseno",        label: "Diseño de Jardín",            angle: 90,  color: "#e8603c", texto: "Proyecto integral de paisajismo desde el concepto hasta los planos de detalle. Paleta vegetal, materialidad, riego e iluminación." },
-  { id: "residencial",   label: "Residencial",                  angle: 45,  color: "#e8963c", texto: "Jardines privados para casas y departamentos. Espacios que reflejan la identidad de quienes los habitan y se adaptan al entorno." },
-  { id: "corporativo",   label: "Corporativo",                  angle: 0,   color: "#c8d44e", texto: "Paisajismo para oficinas, edificios y espacios de trabajo. Diseño que mejora el bienestar de las personas y la imagen de las empresas." },
-  { id: "hoteleria",     label: "Hotelería",                    angle: 315, color: "#5abeaa", texto: "Jardines para hoteles, lodges y centros de descanso. Experiencias de naturaleza que se convierten en parte del servicio." },
-  { id: "azoteas",       label: "Azoteas y Terrazas",           angle: 270, color: "#4a8fd4", texto: "Diseño de jardines en altura para terrazas, azoteas y balcones. Soluciones técnicas adaptadas a cada estructura y clima." },
-  { id: "mantenimiento", label: "Supervisión y Mantenimiento",  angle: 225, color: "#9b6cc8", texto: "Acompañamiento continuo del jardín en el tiempo. Planes de mantención, riego, poda y seguimiento estacional para que el proyecto crezca tal como fue concebido." },
-  { id: "ejecutivo",     label: "Asesorías en Paisaje",         angle: 180, color: "#d44e7a", texto: "Consultoría y asesoría en paisajismo para proyectos en distintas etapas: selección de plantas, revisión de diseños, orientación técnica y recomendaciones personalizadas." },
-  { id: "supervision",   label: "Supervisión de Obras",         angle: 135, color: "#e87a3c", texto: "Acompañamiento en terreno durante la ejecución del proyecto. Control de calidad, coordinación de contratistas y seguimiento." },
+  { id: "diseno",        label: "Diseño de Jardín",            angle: 90,  color: "#e8603c", slug: "diseno-de-jardin", texto: "Proyecto integral de paisajismo desde el concepto hasta los planos de detalle. Paleta vegetal, materialidad, riego e iluminación." },
+  { id: "residencial",   label: "Residencial",                  angle: 45,  color: "#e8963c", slug: "residencial",               texto: "Jardines privados para casas y departamentos. Espacios que reflejan la identidad de quienes los habitan y se adaptan al entorno." },
+  { id: "corporativo",   label: "Corporativo",                  angle: 0,   color: "#c8d44e", slug: "corporativo",                texto: "Paisajismo para oficinas, edificios y espacios de trabajo. Diseño que mejora el bienestar de las personas y la imagen de las empresas." },
+  { id: "hoteleria",     label: "Hotelería",                    angle: 315, color: "#5abeaa", slug: "hoteleria",                 texto: "Jardines para hoteles, lodges y centros de descanso. Experiencias de naturaleza que se convierten en parte del servicio." },
+  { id: "azoteas",       label: "Azoteas y Terrazas",           angle: 270, color: "#4a8fd4", slug: "azoteas-y-terrazas",       texto: "Diseño de jardines en altura para terrazas, azoteas y balcones. Soluciones técnicas adaptadas a cada estructura y clima." },
+  { id: "mantenimiento", label: "Supervisión y Mantenimiento",  angle: 225, color: "#9b6cc8", slug: "supervision-y-mantenimiento", texto: "Acompañamiento continuo del jardín en el tiempo. Planes de mantención, riego, poda y seguimiento estacional para que el proyecto crezca tal como fue concebido." },
+  { id: "ejecutivo",     label: "Asesorías en Paisaje",         angle: 180, color: "#d44e7a", slug: "asesorias-en-paisaje",      texto: "Consultoría y asesoría en paisajismo para proyectos en distintas etapas: selección de plantas, revisión de diseños, orientación técnica y recomendaciones personalizadas." },
+  { id: "supervision",   label: "Supervisión de Obras",         angle: 135, color: "#e87a3c", slug: "supervision-de-obras",      texto: "Acompañamiento en terreno durante la ejecución del proyecto. Control de calidad, coordinación de contratistas y seguimiento." },
 ];
 
 const CX = 400;
@@ -66,6 +67,7 @@ function toRad(deg: number) {
 }
 
 export default function ServiciosPage() {
+  const router = useRouter();
   const [activo, setActivo] = useState<string | null>(null);
   const sa = servicios.find((s) => s.id === activo);
 
@@ -158,7 +160,8 @@ export default function ServiciosPage() {
                   return (
                     <g key={s.id} style={{ cursor: "pointer" }}
                       onMouseEnter={() => setActivo(s.id)}
-                      onMouseLeave={() => setActivo(null)}>
+                      onMouseLeave={() => setActivo(null)}
+                      onClick={() => router.push(`/servicios/${s.slug}`)}>
                       {/* Línea punteada */}
                       <line x1={x1} y1={y1} x2={x2} y2={y2}
                         stroke={s.color}

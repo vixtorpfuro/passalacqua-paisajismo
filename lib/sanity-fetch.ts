@@ -35,6 +35,15 @@ export async function getAllProyectos(): Promise<SanityProyecto[]> {
   );
 }
 
+export async function getProyectosByType(type: string): Promise<SanityProyecto[]> {
+  return sanityClient.fetch(
+    `*[_type == "proyecto" && type == $type] | order(order asc) {
+      _id, name, slug, order, coverImage, type
+    }`,
+    { type }
+  );
+}
+
 export async function getProyecto(slug: string): Promise<SanityProyecto | null> {
   return sanityClient.fetch(
     `*[_type == "proyecto" && slug.current == $slug][0] {
