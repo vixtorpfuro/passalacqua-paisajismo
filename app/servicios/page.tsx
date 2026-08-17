@@ -45,14 +45,14 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 }
 
 const servicios = [
-  { id: "diseno",       label: "Diseño de Jardín",       angle: 90,  texto: "Proyecto integral de paisajismo desde el concepto hasta los planos de detalle. Paleta vegetal, materialidad, riego e iluminación." },
-  { id: "residencial",  label: "Residencial",             angle: 45,  texto: "Jardines privados para casas y departamentos. Espacios que reflejan la identidad de quienes los habitan y se adaptan al entorno." },
-  { id: "corporativo",  label: "Corporativo",             angle: 0,   texto: "Paisajismo para oficinas, edificios y espacios de trabajo. Diseño que mejora el bienestar de las personas y la imagen de las empresas." },
-  { id: "hoteleria",    label: "Hotelería",               angle: 315, texto: "Jardines para hoteles, lodges y centros de descanso. Experiencias de naturaleza que se convierten en parte del servicio." },
-  { id: "azoteas",      label: "Azoteas y Terrazas",      angle: 270, texto: "Diseño de jardines en altura para terrazas, azoteas y balcones. Soluciones técnicas adaptadas a cada estructura y clima." },
-  { id: "mantenimiento", label: "Supervisión y Mantenimiento", angle: 225, texto: "Acompañamiento continuo del jardín en el tiempo. Planes de mantención, riego, poda y seguimiento estacional para que el proyecto crezca tal como fue concebido." },
-  { id: "ejecutivo",    label: "Asesorías en Paisaje",    angle: 180, texto: "Consultoría y asesoría en paisajismo para proyectos en distintas etapas: selección de plantas, revisión de diseños, orientación técnica y recomendaciones personalizadas." },
-  { id: "supervision",  label: "Supervisión de Obras",    angle: 135, texto: "Acompañamiento en terreno durante la ejecución del proyecto. Control de calidad, coordinación de contratistas y seguimiento." },
+  { id: "diseno",        label: "Diseño de Jardín",            angle: 90,  color: "#e8603c", texto: "Proyecto integral de paisajismo desde el concepto hasta los planos de detalle. Paleta vegetal, materialidad, riego e iluminación." },
+  { id: "residencial",   label: "Residencial",                  angle: 45,  color: "#e8963c", texto: "Jardines privados para casas y departamentos. Espacios que reflejan la identidad de quienes los habitan y se adaptan al entorno." },
+  { id: "corporativo",   label: "Corporativo",                  angle: 0,   color: "#c8d44e", texto: "Paisajismo para oficinas, edificios y espacios de trabajo. Diseño que mejora el bienestar de las personas y la imagen de las empresas." },
+  { id: "hoteleria",     label: "Hotelería",                    angle: 315, color: "#5abeaa", texto: "Jardines para hoteles, lodges y centros de descanso. Experiencias de naturaleza que se convierten en parte del servicio." },
+  { id: "azoteas",       label: "Azoteas y Terrazas",           angle: 270, color: "#4a8fd4", texto: "Diseño de jardines en altura para terrazas, azoteas y balcones. Soluciones técnicas adaptadas a cada estructura y clima." },
+  { id: "mantenimiento", label: "Supervisión y Mantenimiento",  angle: 225, color: "#9b6cc8", texto: "Acompañamiento continuo del jardín en el tiempo. Planes de mantención, riego, poda y seguimiento estacional para que el proyecto crezca tal como fue concebido." },
+  { id: "ejecutivo",     label: "Asesorías en Paisaje",         angle: 180, color: "#d44e7a", texto: "Consultoría y asesoría en paisajismo para proyectos en distintas etapas: selección de plantas, revisión de diseños, orientación técnica y recomendaciones personalizadas." },
+  { id: "supervision",   label: "Supervisión de Obras",         angle: 135, color: "#e87a3c", texto: "Acompañamiento en terreno durante la ejecución del proyecto. Control de calidad, coordinación de contratistas y seguimiento." },
 ];
 
 const CX = 400;
@@ -161,14 +161,16 @@ export default function ServiciosPage() {
                       onMouseLeave={() => setActivo(null)}>
                       {/* Línea punteada */}
                       <line x1={x1} y1={y1} x2={x2} y2={y2}
-                        stroke={isActive ? "#c8873a" : "rgba(43,37,32,0.22)"}
-                        strokeWidth="1" strokeDasharray="3 4"
-                        style={{ transition: "stroke 0.2s" }}
+                        stroke={s.color}
+                        strokeWidth={isActive ? 3 : 2}
+                        opacity={isActive ? 1 : 0.9}
+                        style={{ transition: "all 0.2s" }}
                       />
                       {/* Punto */}
                       <circle cx={x2} cy={y2}
-                        r={isActive ? 5 : 3.5}
-                        fill={isActive ? "#c8873a" : "#2b2520"}
+                        r={isActive ? 6 : 4}
+                        fill={s.color}
+                        opacity={isActive ? 1 : 0.9}
                         style={{ transition: "all 0.2s" }}
                       />
                       {/* Hitbox */}
@@ -177,9 +179,9 @@ export default function ServiciosPage() {
                       <text x={lx} y={line2 ? ly - 7 : ly + 4} textAnchor={anchor}
                         style={{
                           fontSize: "12px",
-                          fontWeight: isActive ? "700" : "400",
+                          fontWeight: isActive ? "700" : "500",
                           letterSpacing: "0.1em",
-                          fill: isActive ? "#c8873a" : "#2b2520",
+                          fill: isActive ? s.color : "#2b2520",
                           fontFamily: "inherit",
                           userSelect: "none",
                           transition: "fill 0.2s",
@@ -190,9 +192,9 @@ export default function ServiciosPage() {
                         <text x={lx} y={ly + 10} textAnchor={anchor}
                           style={{
                             fontSize: "12px",
-                            fontWeight: isActive ? "700" : "400",
+                            fontWeight: isActive ? "700" : "500",
                             letterSpacing: "0.1em",
-                            fill: isActive ? "#c8873a" : "#2b2520",
+                            fill: isActive ? s.color : "#2b2520",
                             fontFamily: "inherit",
                             userSelect: "none",
                             transition: "fill 0.2s",
