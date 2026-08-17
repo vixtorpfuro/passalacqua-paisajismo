@@ -1,19 +1,42 @@
 "use client";
 import { useState } from "react";
+
+function FadeImg({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onLoad={() => setLoaded(true)}
+      style={{
+        width: "100%",
+        height: "auto",
+        maxHeight: "520px",
+        objectFit: "contain",
+        display: "block",
+        filter: loaded ? "blur(0px)" : "blur(12px)",
+        transform: loaded ? "scale(1)" : "scale(1.03)",
+        transition: "filter 0.6s ease, transform 0.6s ease",
+      }}
+    />
+  );
+}
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 
+const OPT = "?w=600&fm=webp&q=80";
 const W = {
-  wellbeing:   "https://cdn.sanity.io/images/kcbpv06c/production/2d3f74eff41e87fb535121d8f15b379499f533eb-1228x1623.png",
-  compartir:   "https://cdn.sanity.io/images/kcbpv06c/production/570eaa29c6cf80dbae7ecc082ca9226f0ed43cc7-1080x1920.png",
-  conectar:    "https://cdn.sanity.io/images/kcbpv06c/production/afccd41dd40b89ceb7aabb5d69bd4ec5e0433da4-1080x1920.png",
-  recorrer:    "https://cdn.sanity.io/images/kcbpv06c/production/591585c27e62c7818f4dba61feb580e999d43d82-1080x1920.png",
-  desconectar: "https://cdn.sanity.io/images/kcbpv06c/production/c772f087043a983752aab3aedc0857e2aa4867cb-1080x1920.png",
-  reunir:      "https://cdn.sanity.io/images/kcbpv06c/production/34d6600d682c01233a62e3047892247dbcd8e993-1080x1920.png",
-  resguardar:  "https://cdn.sanity.io/images/kcbpv06c/production/a9c074c58d9bc91b3bff533d16e8a146e9927fc1-1080x1920.png",
-  entretener:  "https://cdn.sanity.io/images/kcbpv06c/production/514f519f179612619d51c46f8a7a83c32c1f12e9-1080x1920.png",
-  jugar:       "https://cdn.sanity.io/images/kcbpv06c/production/891083058188c0a5b01db5227a6bf831db1e84da-1080x1920.png",
+  wellbeing:   `https://cdn.sanity.io/images/kcbpv06c/production/2d3f74eff41e87fb535121d8f15b379499f533eb-1228x1623.png${OPT}`,
+  compartir:   `https://cdn.sanity.io/images/kcbpv06c/production/570eaa29c6cf80dbae7ecc082ca9226f0ed43cc7-1080x1920.png${OPT}`,
+  conectar:    `https://cdn.sanity.io/images/kcbpv06c/production/afccd41dd40b89ceb7aabb5d69bd4ec5e0433da4-1080x1920.png${OPT}`,
+  recorrer:    `https://cdn.sanity.io/images/kcbpv06c/production/591585c27e62c7818f4dba61feb580e999d43d82-1080x1920.png${OPT}`,
+  desconectar: `https://cdn.sanity.io/images/kcbpv06c/production/c772f087043a983752aab3aedc0857e2aa4867cb-1080x1920.png${OPT}`,
+  reunir:      `https://cdn.sanity.io/images/kcbpv06c/production/34d6600d682c01233a62e3047892247dbcd8e993-1080x1920.png${OPT}`,
+  resguardar:  `https://cdn.sanity.io/images/kcbpv06c/production/a9c074c58d9bc91b3bff533d16e8a146e9927fc1-1080x1920.png${OPT}`,
+  entretener:  `https://cdn.sanity.io/images/kcbpv06c/production/514f519f179612619d51c46f8a7a83c32c1f12e9-1080x1920.png${OPT}`,
+  jugar:       `https://cdn.sanity.io/images/kcbpv06c/production/891083058188c0a5b01db5227a6bf831db1e84da-1080x1920.png${OPT}`,
 };
 
 const paradas = [
@@ -131,8 +154,7 @@ export default function WellbeingPage() {
                   <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#2b2520", marginBottom: "12px" }}>
                     {panelLeft.texto}
                   </p>
-                  <img src={panelLeft.image} alt={panelLeft.label} loading="lazy"
-                    style={{ width: "100%", height: "auto", maxHeight: "520px", objectFit: "contain", display: "block" }} />
+                  <FadeImg src={panelLeft.image} alt={panelLeft.label} />
                 </div>
               )}
             </div>
@@ -198,8 +220,7 @@ export default function WellbeingPage() {
                   <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#2b2520", marginBottom: "12px" }}>
                     {panelRight.texto}
                   </p>
-                  <img src={panelRight.image} alt={panelRight.label} loading="lazy"
-                    style={{ width: "100%", height: "auto", maxHeight: "520px", objectFit: "contain", display: "block" }} />
+                  <FadeImg src={panelRight.image} alt={panelRight.label} />
                 </div>
               )}
             </div>
