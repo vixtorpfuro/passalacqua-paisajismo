@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const WEBHOOK = "https://script.google.com/macros/s/AKfycbwXFmSJkC8o6j9a6EYWdItYyHdEKQJ1s1cLzQQRhHqQf3nuvuxotMiEPGKBnSaQ98NK/exec";
+const WEBHOOK = "https://script.google.com/a/macros/victorpellegrini.com/s/AKfycbzKtwKPELPEOzvKEo4zQUbvi-zLvZ1VgsQT0ATjBvJZGTBGN7XuTLS0yCHBy0Mj9dlF_A/exec";
 
 function Newsletter() {
   const [nombre, setNombre] = useState("");
