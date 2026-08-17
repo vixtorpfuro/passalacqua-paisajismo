@@ -16,7 +16,7 @@ function Newsletter() {
       await fetch(WEBHOOK, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify({ nombre, email }),
       });
       setStatus("ok");
