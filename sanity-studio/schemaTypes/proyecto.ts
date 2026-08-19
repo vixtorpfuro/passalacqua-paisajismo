@@ -55,7 +55,8 @@ export const proyectoType = defineType({
     defineField({
       name: 'type',
       title: 'Tipo',
-      type: 'string',
+      type: 'array',
+      of: [{ type: 'string' }],
       options: {
         list: [
           'Corporativo',
@@ -74,6 +75,13 @@ export const proyectoType = defineType({
       title: 'name',
       subtitle: 'type',
       media: 'coverImage',
+    },
+    prepare({ title, subtitle, media }) {
+      return {
+        title,
+        subtitle: Array.isArray(subtitle) ? subtitle.join(', ') : subtitle,
+        media,
+      };
     },
   },
 })
