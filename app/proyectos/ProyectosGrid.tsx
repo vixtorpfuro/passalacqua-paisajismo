@@ -18,7 +18,7 @@ type Proyecto = {
   _id: string;
   name: string;
   slug: { current: string };
-  type?: string;
+  type?: string[];
   coverUrl: string;
 };
 
@@ -27,7 +27,7 @@ export default function ProyectosGrid({ proyectos }: { proyectos: Proyecto[] }) 
 
   const filtrados = activa === "Todos"
     ? proyectos
-    : proyectos.filter((p) => p.type === activa);
+    : proyectos.filter((p) => p.type?.includes(activa));
 
   const secondary = filtrados.slice(0, 21);
   const more = filtrados.slice(21);
