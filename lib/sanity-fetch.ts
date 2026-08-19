@@ -24,7 +24,7 @@ export type SanityProyecto = {
   description?: string;
   location?: string;
   year?: string;
-  type?: string;
+  type?: string[];
 };
 
 export async function getAllProyectos(): Promise<SanityProyecto[]> {
@@ -37,7 +37,7 @@ export async function getAllProyectos(): Promise<SanityProyecto[]> {
 
 export async function getProyectosByType(type: string): Promise<SanityProyecto[]> {
   return sanityClient.fetch(
-    `*[_type == "proyecto" && type == $type] | order(order asc) {
+    `*[_type == "proyecto" && $type in type] | order(order asc) {
       _id, name, slug, order, coverImage, type
     }`,
     { type }
