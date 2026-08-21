@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import { getProyecto, urlFor } from "@/lib/sanity-fetch";
+import { BackButtonInline, BackButtonFull } from "./BackButton";
 
 export const revalidate = 60;
 
@@ -60,12 +60,7 @@ export default async function ProyectoPage({
             </div>
           )}
           <div style={{ marginTop: "24px" }}>
-            <Link href="/proyectos" style={{
-              fontSize: "11px", letterSpacing: "0.12em", color: "#c8873a",
-              textDecoration: "none", fontWeight: "600",
-            }}>
-              ← Proyectos
-            </Link>
+            <BackButtonInline />
           </div>
         </div>
 
@@ -109,16 +104,7 @@ export default async function ProyectoPage({
       {/* Volver */}
       <div style={{ padding: "0 24px 60px", borderTop: "1px solid rgba(43,37,32,0.12)" }}>
         <div style={{ paddingTop: "40px" }}>
-          <Link
-            href="/proyectos"
-            style={{
-              fontSize: "11px", fontWeight: "700", letterSpacing: "0.15em",
-              color: "#f2ede8", backgroundColor: "#2b2520",
-              padding: "14px 28px", textDecoration: "none", display: "inline-block",
-            }}
-          >
-            ← TODOS LOS PROYECTOS
-          </Link>
+          <BackButtonFull />
         </div>
       </div>
 
