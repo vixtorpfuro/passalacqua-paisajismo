@@ -28,9 +28,7 @@ export default async function ProyectosPage() {
       description: p!.description ?? "",
     }));
 
-  const featuredSet = new Set(FEATURED_SLUGS);
   const rest = todos
-    .filter((p) => !featuredSet.has(p.slug.current))
     .map((p) => ({
       _id: p._id,
       name: p.name,
