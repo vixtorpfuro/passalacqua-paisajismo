@@ -65,22 +65,33 @@ export default function ProyectosGrid({
       {featuredP && (featuredP.coverUrlLarge || featuredP.coverUrl) && (
         <div style={{ padding: "24px 24px 0" }}>
           <Link href={`/proyectos/${featuredP.slug.current}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
-            <div style={{ position: "relative", width: "100%", aspectRatio: "16/7", overflow: "hidden" }}>
-              <img
-                src={featuredP.coverUrlLarge || featuredP.coverUrl}
-                alt={featuredP.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(43,37,32,0.65) 0%, transparent 55%)" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "28px 32px", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
-                <div>
-                  <div style={{ fontSize: "10px", letterSpacing: "0.2em", color: "rgba(242,237,232,0.7)", textTransform: "uppercase", marginBottom: "6px" }}>DESTACADO</div>
-                  <h2 style={{ fontSize: "1.8rem", fontWeight: "700", color: "#f2ede8", textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0 }}>{featuredP.name}</h2>
-                  {featuredP.description && (
-                    <p style={{ fontSize: "0.9rem", color: "rgba(242,237,232,0.8)", marginTop: "6px", fontStyle: "italic", maxWidth: "500px" }}>{featuredP.description}</p>
-                  )}
+            <div className="grid-hero">
+              <div style={{ overflow: "hidden", height: "520px" }}>
+                <img
+                  src={featuredP.coverUrlLarge || featuredP.coverUrl}
+                  alt={featuredP.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </div>
+              <div style={{
+                backgroundColor: "#ddd4c8", display: "flex", flexDirection: "column",
+                justifyContent: "flex-end", padding: "32px",
+              }}>
+                <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "rgba(43,37,32,0.5)", marginBottom: "16px" }}>
+                  PROYECTO DESTACADO
                 </div>
-                <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "#f2ede8", fontWeight: "700", whiteSpace: "nowrap", paddingLeft: "24px" }}>VER PROYECTO →</div>
+                <h2 style={{
+                  fontSize: "2.6rem", fontWeight: "700", lineHeight: 1.0,
+                  letterSpacing: "-0.01em", color: "#2b2520", textTransform: "uppercase",
+                  marginBottom: "16px",
+                }}>
+                  {featuredP.name.split(" ").map((w, i) => <span key={i} style={{ display: "block" }}>{w}</span>)}
+                </h2>
+                {featuredP.description && (
+                  <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#2b2520" }}>
+                    {featuredP.description}
+                  </p>
+                )}
               </div>
             </div>
           </Link>
