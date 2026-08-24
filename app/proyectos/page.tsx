@@ -1,7 +1,5 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AnimatedSection from "@/components/AnimatedSection";
-import FeaturedCarousel from "./FeaturedCarousel";
 import ProyectosGrid from "./ProyectosGrid";
 import { getAllProyectos, urlFor } from "@/lib/sanity-fetch";
 
@@ -51,19 +49,7 @@ export default async function ProyectosPage() {
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
-
-      {/* Hero rotativo */}
-      {featured.length > 0 && (
-        <AnimatedSection delay={0}>
-          <div style={{ padding: "24px 24px 0" }}>
-            <FeaturedCarousel items={featured} />
-          </div>
-        </AnimatedSection>
-      )}
-
-      {/* Filtros + grilla */}
-      <ProyectosGrid proyectos={rest} />
-
+      <ProyectosGrid proyectos={rest} carouselItems={featured} />
       <Footer />
     </div>
   );

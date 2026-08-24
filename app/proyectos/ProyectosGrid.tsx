@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import ProjectCardClient from "./ProjectCardClient";
+import FeaturedCarousel from "./FeaturedCarousel";
 
 const CATEGORIAS = [
   "Todos",
@@ -26,7 +27,15 @@ type Proyecto = {
   description?: string;
 };
 
-export default function ProyectosGrid({ proyectos }: { proyectos: Proyecto[] }) {
+type CarouselItem = { slug: string; name: string; coverUrl: string; description: string };
+
+export default function ProyectosGrid({
+  proyectos,
+  carouselItems = [],
+}: {
+  proyectos: Proyecto[];
+  carouselItems?: CarouselItem[];
+}) {
   const [activa, setActiva] = useState("Todos");
 
   const filtrados = activa === "Todos"
@@ -47,6 +56,37 @@ export default function ProyectosGrid({ proyectos }: { proyectos: Proyecto[] }) 
 
   return (
     <>
+      {/* Hero: carrusel en "Todos", destacado de categoría cuando hay filtro */}
+      {activa === "Todos" && carouselItems.length > 0 && (
+        <div style={{ padding: "24px 24px 0" }}>
+          <FeaturedCarousel items={carouselItems} />
+        </div>
+      )}
+      {featuredP && (featuredP.coverUrlLarge || featuredP.coverUrl) && (
+        <div style={{ padding: "24px 24px 0" }}>
+          <Link href={`/proyectos/${featuredP.slug.current}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <div style={{ position: "relative", width: "100%", aspectRatio: "16/7", overflow: "hidden" }}>
+              <img
+                src={featuredP.coverUrlLarge || featuredP.coverUrl}
+                alt={featuredP.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(43,37,32,0.65) 0%, transparent 55%)" }} />
+              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "28px 32px", display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
+                <div>
+                  <div style={{ fontSize: "10px", letterSpacing: "0.2em", color: "rgba(242,237,232,0.7)", textTransform: "uppercase", marginBottom: "6px" }}>DESTACADO</div>
+                  <h2 style={{ fontSize: "1.8rem", fontWeight: "700", color: "#f2ede8", textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0 }}>{featuredP.name}</h2>
+                  {featuredP.description && (
+                    <p style={{ fontSize: "0.9rem", color: "rgba(242,237,232,0.8)", marginTop: "6px", fontStyle: "italic", maxWidth: "500px" }}>{featuredP.description}</p>
+                  )}
+                </div>
+                <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "#f2ede8", fontWeight: "700", whiteSpace: "nowrap", paddingLeft: "24px" }}>VER PROYECTO →</div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
+
       {/* Filtros */}
       <div style={{
         padding: "20px 24px 0",
@@ -75,47 +115,6 @@ export default function ProyectosGrid({ proyectos }: { proyectos: Proyecto[] }) 
           </button>
         ))}
       </div>
-
-      {/* Proyecto destacado de la categoría */}
-      {featuredP && (featuredP.coverUrlLarge || featuredP.coverUrl) && (
-        <div style={{ padding: "16px 24px 0" }}>
-          <Link href={`/proyectos/${featuredP.slug.current}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
-            <div style={{ position: "relative", width: "100%", aspectRatio: "16/7", overflow: "hidden" }}>
-              <img
-                src={featuredP.coverUrlLarge || featuredP.coverUrl}
-                alt={featuredP.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(43,37,32,0.65) 0%, transparent 55%)",
-              }} />
-              <div style={{
-                position: "absolute", bottom: 0, left: 0, right: 0,
-                padding: "28px 32px",
-                display: "flex", alignItems: "flex-end", justifyContent: "space-between",
-              }}>
-                <div>
-                  <div style={{ fontSize: "10px", letterSpacing: "0.2em", color: "rgba(242,237,232,0.7)", textTransform: "uppercase", marginBottom: "6px" }}>
-                    DESTACADO
-                  </div>
-                  <h2 style={{ fontSize: "1.8rem", fontWeight: "700", color: "#f2ede8", textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0 }}>
-                    {featuredP.name}
-                  </h2>
-                  {featuredP.description && (
-                    <p style={{ fontSize: "0.9rem", color: "rgba(242,237,232,0.8)", marginTop: "6px", fontStyle: "italic", maxWidth: "500px" }}>
-                      {featuredP.description}
-                    </p>
-                  )}
-                </div>
-                <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "#f2ede8", fontWeight: "700", whiteSpace: "nowrap", paddingLeft: "24px" }}>
-                  VER PROYECTO →
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div>
-      )}
 
       {/* Grilla secundaria — 3 col */}
       <AnimatedSection delay={50}>
