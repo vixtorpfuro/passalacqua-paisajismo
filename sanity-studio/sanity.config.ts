@@ -3,6 +3,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { proyectoType } from "./schemaTypes/proyecto";
 import { postType } from "./schemaTypes/post";
+import { categoriaType } from "./schemaTypes/categoria";
 
 export default defineConfig({
   name: "passalacqua-paisajismo",
@@ -11,6 +12,6 @@ export default defineConfig({
   dataset: "production",
   plugins: [structureTool(), visionTool()],
   schema: {
-    types: [proyectoType, postType],
+    types: [proyectoType, postType, categoriaType],
   },
 });

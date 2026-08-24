@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedCarousel from "./FeaturedCarousel";
 import ProyectosGrid from "./ProyectosGrid";
-import { getAllProyectos, urlFor } from "@/lib/sanity-fetch";
+import { getAllProyectos, getCategoriasFeatured, urlFor } from "@/lib/sanity-fetch";
 
 export const revalidate = 60;
 
@@ -16,7 +16,10 @@ const FEATURED_SLUGS = [
 ];
 
 export default async function ProyectosPage() {
-  const todos = await getAllProyectos();
+  const [todos, categoriasFeatured] = await Promise.all([
+    getAllProyectos(),
+    getCategoriasFeatured(),
+  ]);
 
   const featured = FEATURED_SLUGS
     .map((slug) => todos.find((p) => p.slug.current === slug))
@@ -44,6 +47,17 @@ export default async function ProyectosPage() {
         : "",
     }));
 
+  // Mapa de destacados por categoría con URL de imagen
+  const featuredByCat: Record<string, { slug: string; name: string; coverUrl: string; description?: string }> = {};
+  for (const [cat, p] of Object.entries(categoriasFeatured)) {
+    featuredByCat[cat] = {
+      slug: p.slug.current,
+      name: p.name,
+      coverUrl: p.coverImage ? urlFor(p.coverImage).width(1600).quality(85).url() : "",
+      description: p.description,
+    };
+  }
+
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
@@ -58,7 +72,7 @@ export default async function ProyectosPage() {
       )}
 
       {/* Filtros + grilla */}
-      <ProyectosGrid proyectos={rest} />
+      <ProyectosGrid proyectos={rest} featuredByCat={featuredByCat} />
 
       <Footer />
     </div>

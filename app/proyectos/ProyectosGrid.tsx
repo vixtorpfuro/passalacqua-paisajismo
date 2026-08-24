@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import ProjectCardClient from "./ProjectCardClient";
 
@@ -22,15 +23,35 @@ type Proyecto = {
   coverUrl: string;
 };
 
-export default function ProyectosGrid({ proyectos }: { proyectos: Proyecto[] }) {
+type FeaturedItem = {
+  slug: string;
+  name: string;
+  coverUrl: string;
+  description?: string;
+};
+
+export default function ProyectosGrid({
+  proyectos,
+  featuredByCat = {},
+}: {
+  proyectos: Proyecto[];
+  featuredByCat?: Record<string, FeaturedItem>;
+}) {
   const [activa, setActiva] = useState("Todos");
 
   const filtrados = activa === "Todos"
     ? proyectos
     : proyectos.filter((p) => p.type?.includes(activa));
 
-  const secondary = filtrados.slice(0, 21);
-  const more = filtrados.slice(21);
+  const featured = activa !== "Todos" ? featuredByCat[activa] : null;
+
+  // Excluir el destacado de la grilla para evitar duplicado
+  const sinDestacado = featured
+    ? filtrados.filter((p) => p.slug.current !== featured.slug)
+    : filtrados;
+
+  const secondary = sinDestacado.slice(0, 21);
+  const more = sinDestacado.slice(21);
 
   return (
     <>
@@ -62,6 +83,47 @@ export default function ProyectosGrid({ proyectos }: { proyectos: Proyecto[] }) 
           </button>
         ))}
       </div>
+
+      {/* Proyecto destacado de la categoría */}
+      {featured && featured.coverUrl && (
+        <div style={{ padding: "16px 24px 0" }}>
+          <Link href={`/proyectos/${featured.slug}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+            <div style={{ position: "relative", width: "100%", aspectRatio: "16/7", overflow: "hidden" }}>
+              <img
+                src={featured.coverUrl}
+                alt={featured.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+              <div style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(to top, rgba(43,37,32,0.65) 0%, transparent 55%)",
+              }} />
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0,
+                padding: "28px 32px",
+                display: "flex", alignItems: "flex-end", justifyContent: "space-between",
+              }}>
+                <div>
+                  <div style={{ fontSize: "10px", letterSpacing: "0.2em", color: "rgba(242,237,232,0.7)", textTransform: "uppercase", marginBottom: "6px" }}>
+                    DESTACADO
+                  </div>
+                  <h2 style={{ fontSize: "1.8rem", fontWeight: "700", color: "#f2ede8", textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0 }}>
+                    {featured.name}
+                  </h2>
+                  {featured.description && (
+                    <p style={{ fontSize: "0.9rem", color: "rgba(242,237,232,0.8)", marginTop: "6px", fontStyle: "italic", maxWidth: "500px" }}>
+                      {featured.description}
+                    </p>
+                  )}
+                </div>
+                <div style={{ fontSize: "11px", letterSpacing: "0.15em", color: "#f2ede8", fontWeight: "700", whiteSpace: "nowrap", paddingLeft: "24px" }}>
+                  VER PROYECTO →
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
 
       {/* Grilla secundaria — 3 col */}
       <AnimatedSection delay={50}>

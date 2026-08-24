@@ -71,6 +71,27 @@ export async function getPost(slug: string): Promise<SanityPost | null> {
   );
 }
 
+export type SanityCategoria = {
+  name: string;
+  featuredProject?: SanityProyecto & { coverUrl: string };
+};
+
+export async function getCategoriasFeatured(): Promise<Record<string, SanityProyecto>> {
+  const categorias = await sanityClient.fetch<Array<{ name: string; featuredProject: SanityProyecto }>>(`
+    *[_type == "categoria" && defined(featuredProject)] {
+      name,
+      featuredProject-> {
+        _id, name, slug, coverImage, description, location, year, type
+      }
+    }
+  `);
+  const map: Record<string, SanityProyecto> = {};
+  for (const c of categorias) {
+    if (c.name && c.featuredProject) map[c.name] = c.featuredProject;
+  }
+  return map;
+}
+
 export async function getProyecto(slug: string): Promise<SanityProyecto | null> {
   return sanityClient.fetch(
     `*[_type == "proyecto" && slug.current == $slug][0] {
