@@ -38,9 +38,10 @@ export default function ProyectosGrid({
 }) {
   const [activa, setActiva] = useState("Todos");
 
+  const normalize = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const filtrados = activa === "Todos"
     ? proyectos
-    : proyectos.filter((p) => p.type?.includes(activa));
+    : proyectos.filter((p) => p.type?.some((t) => normalize(t) === normalize(activa)));
 
   // Primer proyecto con featured=true en la categoría activa
   const featuredP = activa !== "Todos"
