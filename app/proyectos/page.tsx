@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import FeaturedCarousel from "./FeaturedCarousel";
 import ProyectosGrid from "./ProyectosGrid";
-import { getAllProyectos, getCategoriasFeatured, urlFor } from "@/lib/sanity-fetch";
+import { getAllProyectos, urlFor } from "@/lib/sanity-fetch";
 
 export const revalidate = 60;
 
@@ -16,10 +16,7 @@ const FEATURED_SLUGS = [
 ];
 
 export default async function ProyectosPage() {
-  const [todos, categoriasFeatured] = await Promise.all([
-    getAllProyectos(),
-    getCategoriasFeatured(),
-  ]);
+  const todos = await getAllProyectos();
 
   const featured = FEATURED_SLUGS
     .map((slug) => todos.find((p) => p.slug.current === slug))
@@ -33,7 +30,6 @@ export default async function ProyectosPage() {
       description: p!.description ?? "",
     }));
 
-  // El resto en orden, excluyendo los featured
   const featuredSet = new Set(FEATURED_SLUGS);
   const rest = todos
     .filter((p) => !featuredSet.has(p.slug.current))
@@ -42,21 +38,15 @@ export default async function ProyectosPage() {
       name: p.name,
       slug: p.slug,
       type: p.type,
+      featured: p.featured,
       coverUrl: p.coverImage
         ? urlFor(p.coverImage).width(800).quality(82).url()
         : "",
-    }));
-
-  // Mapa de destacados por categoría con URL de imagen
-  const featuredByCat: Record<string, { slug: string; name: string; coverUrl: string; description?: string }> = {};
-  for (const [cat, p] of Object.entries(categoriasFeatured)) {
-    featuredByCat[cat] = {
-      slug: p.slug.current,
-      name: p.name,
-      coverUrl: p.coverImage ? urlFor(p.coverImage).width(1600).quality(85).url() : "",
+      coverUrlLarge: p.coverImage
+        ? urlFor(p.coverImage).width(1600).quality(85).url()
+        : "",
       description: p.description,
-    };
-  }
+    }));
 
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
@@ -72,7 +62,7 @@ export default async function ProyectosPage() {
       )}
 
       {/* Filtros + grilla */}
-      <ProyectosGrid proyectos={rest} featuredByCat={featuredByCat} />
+      <ProyectosGrid proyectos={rest} />
 
       <Footer />
     </div>

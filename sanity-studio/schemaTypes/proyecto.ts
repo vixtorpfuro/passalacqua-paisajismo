@@ -53,6 +53,13 @@ export const proyectoType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'featured',
+      title: 'Destacado en categoría',
+      type: 'boolean',
+      description: 'Aparece como proyecto destacado al filtrar por su categoría',
+      initialValue: false,
+    }),
+    defineField({
       name: 'type',
       title: 'Tipo',
       type: 'array',

@@ -20,34 +20,26 @@ type Proyecto = {
   name: string;
   slug: { current: string };
   type?: string[];
+  featured?: boolean;
   coverUrl: string;
-};
-
-type FeaturedItem = {
-  slug: string;
-  name: string;
-  coverUrl: string;
+  coverUrlLarge?: string;
   description?: string;
 };
 
-export default function ProyectosGrid({
-  proyectos,
-  featuredByCat = {},
-}: {
-  proyectos: Proyecto[];
-  featuredByCat?: Record<string, FeaturedItem>;
-}) {
+export default function ProyectosGrid({ proyectos }: { proyectos: Proyecto[] }) {
   const [activa, setActiva] = useState("Todos");
 
   const filtrados = activa === "Todos"
     ? proyectos
     : proyectos.filter((p) => p.type?.includes(activa));
 
-  const featured = activa !== "Todos" ? featuredByCat[activa] : null;
+  // Primer proyecto con featured=true en la categoría activa
+  const featuredP = activa !== "Todos"
+    ? filtrados.find((p) => p.featured)
+    : null;
 
-  // Excluir el destacado de la grilla para evitar duplicado
-  const sinDestacado = featured
-    ? filtrados.filter((p) => p.slug.current !== featured.slug)
+  const sinDestacado = featuredP
+    ? filtrados.filter((p) => p._id !== featuredP._id)
     : filtrados;
 
   const secondary = sinDestacado.slice(0, 21);
@@ -85,13 +77,13 @@ export default function ProyectosGrid({
       </div>
 
       {/* Proyecto destacado de la categoría */}
-      {featured && featured.coverUrl && (
+      {featuredP && (featuredP.coverUrlLarge || featuredP.coverUrl) && (
         <div style={{ padding: "16px 24px 0" }}>
-          <Link href={`/proyectos/${featured.slug}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+          <Link href={`/proyectos/${featuredP.slug.current}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
             <div style={{ position: "relative", width: "100%", aspectRatio: "16/7", overflow: "hidden" }}>
               <img
-                src={featured.coverUrl}
-                alt={featured.name}
+                src={featuredP.coverUrlLarge || featuredP.coverUrl}
+                alt={featuredP.name}
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
               <div style={{
@@ -108,11 +100,11 @@ export default function ProyectosGrid({
                     DESTACADO
                   </div>
                   <h2 style={{ fontSize: "1.8rem", fontWeight: "700", color: "#f2ede8", textTransform: "uppercase", letterSpacing: "-0.01em", margin: 0 }}>
-                    {featured.name}
+                    {featuredP.name}
                   </h2>
-                  {featured.description && (
+                  {featuredP.description && (
                     <p style={{ fontSize: "0.9rem", color: "rgba(242,237,232,0.8)", marginTop: "6px", fontStyle: "italic", maxWidth: "500px" }}>
-                      {featured.description}
+                      {featuredP.description}
                     </p>
                   )}
                 </div>
