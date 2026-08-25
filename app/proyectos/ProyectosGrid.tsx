@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import ProjectCardClient from "./ProjectCardClient";
@@ -36,7 +37,22 @@ export default function ProyectosGrid({
   proyectos: Proyecto[];
   carouselItems?: CarouselItem[];
 }) {
-  const [activa, setActiva] = useState("Todos");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [activa, setActiva] = useState(() => searchParams.get("cat") ?? "Todos");
+
+  useEffect(() => {
+    const cat = searchParams.get("cat") ?? "Todos";
+    setActiva(cat);
+  }, [searchParams]);
+
+  const seleccionar = (cat: string) => {
+    const params = new URLSearchParams(window.location.search);
+    if (cat === "Todos") params.delete("cat");
+    else params.set("cat", cat);
+    const qs = params.toString();
+    router.replace(`/proyectos${qs ? `?${qs}` : ""}`, { scroll: false });
+  };
 
   const filtrados = activa === "Todos"
     ? proyectos
@@ -64,7 +80,7 @@ export default function ProyectosGrid({
       )}
       {featuredP && (featuredP.coverUrlLarge || featuredP.coverUrl) && (
         <div style={{ padding: "24px 24px 0" }}>
-          <Link href={`/proyectos/${featuredP.slug.current}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
+          <Link href={`/proyectos/${featuredP.slug.current}?cat=${encodeURIComponent(activa)}`} style={{ display: "block", textDecoration: "none", color: "inherit" }}>
             <div className="grid-hero">
               <div style={{ overflow: "hidden", height: "520px" }}>
                 <img
@@ -108,7 +124,7 @@ export default function ProyectosGrid({
         {CATEGORIAS.map((cat) => (
           <button
             key={cat}
-            onClick={() => setActiva(cat)}
+            onClick={() => seleccionar(cat)}
             style={{
               fontSize: "11px",
               letterSpacing: "0.12em",
@@ -140,7 +156,7 @@ export default function ProyectosGrid({
                 <ProjectCardClient
                   key={p._id}
                   name={p.name}
-                  href={`/proyectos/${p.slug.current}`}
+                  href={activa === "Todos" ? `/proyectos/${p.slug.current}` : `/proyectos/${p.slug.current}?cat=${encodeURIComponent(activa)}`}
                   coverUrl={p.coverUrl}
                   aspect="4/3"
                 />
@@ -162,7 +178,7 @@ export default function ProyectosGrid({
                 <ProjectCardClient
                   key={p._id}
                   name={p.name}
-                  href={`/proyectos/${p.slug.current}`}
+                  href={activa === "Todos" ? `/proyectos/${p.slug.current}` : `/proyectos/${p.slug.current}?cat=${encodeURIComponent(activa)}`}
                   coverUrl={p.coverUrl}
                   aspect="3/4"
                 />

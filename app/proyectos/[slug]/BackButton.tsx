@@ -1,11 +1,18 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+
+function useBackUrl() {
+  const searchParams = useSearchParams();
+  const cat = searchParams.get("cat");
+  return cat ? `/proyectos?cat=${encodeURIComponent(cat)}` : "/proyectos";
+}
 
 export function BackButtonInline() {
   const router = useRouter();
+  const backUrl = useBackUrl();
   return (
     <button
-      onClick={() => router.back()}
+      onClick={() => router.push(backUrl)}
       style={{
         fontSize: "11px", letterSpacing: "0.12em", color: "#c8873a",
         textDecoration: "none", fontWeight: "600",
@@ -20,9 +27,10 @@ export function BackButtonInline() {
 
 export function BackButtonFull() {
   const router = useRouter();
+  const backUrl = useBackUrl();
   return (
     <button
-      onClick={() => router.back()}
+      onClick={() => router.push(backUrl)}
       style={{
         fontSize: "11px", fontWeight: "700", letterSpacing: "0.15em",
         color: "#f2ede8", backgroundColor: "#2b2520",
