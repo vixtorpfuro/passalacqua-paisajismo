@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -60,7 +61,7 @@ export default async function ProyectoPage({
             </div>
           )}
           <div style={{ marginTop: "24px" }}>
-            <BackButtonInline />
+            <Suspense><BackButtonInline /></Suspense>
           </div>
         </div>
 
@@ -104,7 +105,7 @@ export default async function ProyectoPage({
       {/* Volver */}
       <div style={{ padding: "0 24px 60px", borderTop: "1px solid rgba(43,37,32,0.12)" }}>
         <div style={{ paddingTop: "40px" }}>
-          <BackButtonFull />
+          <Suspense><BackButtonFull /></Suspense>
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProyectosGrid from "./ProyectosGrid";
@@ -47,7 +48,9 @@ export default async function ProyectosPage() {
   return (
     <div style={{ backgroundColor: "#f2ede8", minHeight: "100vh" }}>
       <Header />
-      <ProyectosGrid proyectos={rest} carouselItems={featured} />
+      <Suspense>
+        <ProyectosGrid proyectos={rest} carouselItems={featured} />
+      </Suspense>
       <Footer />
     </div>
   );
