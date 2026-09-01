@@ -20,7 +20,7 @@ export type SanityProyecto = {
   slug: { current: string };
   order: number;
   coverImage?: { asset: { _ref: string } };
-  images?: Array<{ _key: string; asset: { _ref: string } }>;
+  images?: Array<{ _key: string; asset: { _ref: string }; dimensions?: { width: number; height: number; aspectRatio: number } }>;
   description?: string;
   location?: string;
   year?: string;
@@ -76,7 +76,8 @@ export async function getPost(slug: string): Promise<SanityPost | null> {
 export async function getProyecto(slug: string): Promise<SanityProyecto | null> {
   return sanityClient.fetch(
     `*[_type == "proyecto" && slug.current == $slug][0] {
-      _id, name, slug, order, coverImage, images, description, location, year, type
+      _id, name, slug, order, coverImage, description, location, year, type,
+      "images": images[] { _key, asset, "dimensions": asset->metadata.dimensions }
     }`,
     { slug }
   );

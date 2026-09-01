@@ -63,12 +63,8 @@ export default function ProyectosGrid({
     ? filtrados.find((p) => p.featured)
     : null;
 
-  const sinDestacado = featuredP
-    ? filtrados.filter((p) => p._id !== featuredP._id)
-    : filtrados;
-
-  const secondary = sinDestacado.slice(0, 21);
-  const more = sinDestacado.slice(21);
+  const secondary = filtrados.slice(0, 21);
+  const more = filtrados.slice(21);
 
   return (
     <>
