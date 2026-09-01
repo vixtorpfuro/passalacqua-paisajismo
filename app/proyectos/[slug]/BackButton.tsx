@@ -1,23 +1,17 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-function useBackUrl() {
-  const searchParams = useSearchParams();
-  const cat = searchParams.get("cat");
-  return cat ? `/proyectos?cat=${encodeURIComponent(cat)}` : "/proyectos";
-}
+type BackButtonProps = { backUrl: string };
 
-export function BackButtonInline() {
+export function BackButtonInline({ backUrl }: BackButtonProps) {
   const router = useRouter();
-  const backUrl = useBackUrl();
   return (
     <button
       onClick={() => router.push(backUrl)}
       style={{
         fontSize: "11px", letterSpacing: "0.12em", color: "#c8873a",
-        textDecoration: "none", fontWeight: "600",
-        background: "none", border: "none", cursor: "pointer", padding: 0,
-        fontFamily: "inherit",
+        fontWeight: "600", background: "none", border: "none",
+        cursor: "pointer", padding: 0, fontFamily: "inherit",
       }}
     >
       ← Proyectos
@@ -25,9 +19,8 @@ export function BackButtonInline() {
   );
 }
 
-export function BackButtonFull() {
+export function BackButtonFull({ backUrl }: BackButtonProps) {
   const router = useRouter();
-  const backUrl = useBackUrl();
   return (
     <button
       onClick={() => router.push(backUrl)}
