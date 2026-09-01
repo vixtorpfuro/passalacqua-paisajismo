@@ -13,12 +13,11 @@ type Props = {
   location?: string;
   year?: string;
   description?: string;
-  coverUrl: string | null;
   images: ImageItem[];
   backUrl: string;
 };
 
-export default function ProyectoContent({ name, type, location, year, description, coverUrl, images, backUrl }: Props) {
+export default function ProyectoContent({ name, type, location, year, description, images, backUrl }: Props) {
   const [infoOpen, setInfoOpen] = useState(false);
 
   // Agrupar: verticales de a pares, horizontales solas
@@ -50,17 +49,6 @@ export default function ProyectoContent({ name, type, location, year, descriptio
 
   return (
     <>
-      {/* Hero */}
-      {coverUrl && (
-        <div style={{ width: "100%", height: "80vh", overflow: "hidden" }}>
-          <img
-            src={coverUrl}
-            alt={name}
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", display: "block" }}
-          />
-        </div>
-      )}
-
       {/* Header */}
       <div style={{ padding: "48px 72px 40px", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
