@@ -24,8 +24,11 @@ export default async function ProyectoPage({
     ? urlFor(proyecto.coverImage).width(1920).quality(85).url()
     : null;
 
-  // Saltamos la primera imagen de galería (ya se usa como hero/portada)
-  const galleryImages = (proyecto.images ?? []).slice(1);
+  // Excluir la portada de la galería si aparece en images[]
+  const coverRef = proyecto.coverImage?.asset?._ref;
+  const galleryImages = (proyecto.images ?? []).filter(
+    (img) => !coverRef || img.asset._ref !== coverRef
+  );
   const images = galleryImages.map((img) => {
     const ar = img.dimensions?.aspectRatio ?? 1.5;
     const w = ar >= 1 ? 1600 : 900;
