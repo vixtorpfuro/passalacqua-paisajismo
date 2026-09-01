@@ -20,7 +20,7 @@ export type SanityProyecto = {
   slug: { current: string };
   order: number;
   coverImage?: { asset: { _ref: string } };
-  images?: Array<{ _key: string; asset: { _ref: string }; dimensions?: { width: number; height: number; aspectRatio: number } }>;
+  images?: Array<{ _key: string; asset?: { _ref: string }; dimensions?: { width: number; height: number; aspectRatio: number } }>;
   description?: string;
   location?: string;
   year?: string;

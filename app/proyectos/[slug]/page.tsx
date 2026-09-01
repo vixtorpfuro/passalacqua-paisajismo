@@ -23,13 +23,13 @@ export default async function ProyectoPage({
   // Excluir la portada de la galería si aparece en images[]
   const coverRef = proyecto.coverImage?.asset?._ref;
   const galleryImages = (proyecto.images ?? []).filter(
-    (img) => !coverRef || img.asset._ref !== coverRef
+    (img) => !coverRef || img.asset?._ref !== coverRef
   );
   const images = galleryImages.map((img) => {
     const ar = img.dimensions?.aspectRatio ?? 1.5;
     const w = ar >= 1 ? 1600 : 900;
     return {
-      url: urlFor(img).width(w).quality(83).url(),
+      url: img.asset ? urlFor(img).width(w).quality(83).url() : "",
       aspectRatio: ar,
     };
   });
