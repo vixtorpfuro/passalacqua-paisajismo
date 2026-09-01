@@ -8,18 +8,25 @@ export const revalidate = 60;
 
 export default async function ProyectoPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ cat?: string }>;
 }) {
   const { slug } = await params;
+  const { cat } = await searchParams;
   const proyecto = await getProyecto(slug);
   if (!proyecto) notFound();
+
+  const backUrl = cat ? `/proyectos?cat=${encodeURIComponent(cat)}` : "/proyectos";
 
   const coverUrl = proyecto.coverImage
     ? urlFor(proyecto.coverImage).width(1920).quality(85).url()
     : null;
 
-  const images = (proyecto.images ?? []).map((img) => {
+  // Saltamos la primera imagen de galería (ya se usa como hero/portada)
+  const galleryImages = (proyecto.images ?? []).slice(1);
+  const images = galleryImages.map((img) => {
     const ar = img.dimensions?.aspectRatio ?? 1.5;
     const w = ar >= 1 ? 1600 : 900;
     return {
@@ -39,6 +46,7 @@ export default async function ProyectoPage({
         description={proyecto.description}
         coverUrl={coverUrl}
         images={images}
+        backUrl={backUrl}
       />
       <Footer />
     </div>
