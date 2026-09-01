@@ -50,7 +50,7 @@ export default function ProyectoContent({ name, type, location, year, descriptio
   return (
     <>
       {/* Header */}
-      <div style={{ padding: "48px 72px 40px", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
+      <div style={{ padding: "48px clamp(32px, 9vw, 160px) 40px", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
           <div style={{ flex: 1 }}>
             {meta && (
@@ -91,7 +91,7 @@ export default function ProyectoContent({ name, type, location, year, descriptio
       </div>
 
       {/* Galería */}
-      <div style={{ padding: "32px 72px 100px" }}>
+      <div style={{ padding: "32px clamp(32px, 9vw, 160px) 100px" }}>
         {groups.map((g, idx) => {
           if (g.kind === "single") {
             return (
@@ -123,7 +123,7 @@ export default function ProyectoContent({ name, type, location, year, descriptio
       </div>
 
       {/* Volver */}
-      <div style={{ padding: "40px 72px 60px", borderTop: "1px solid rgba(43,37,32,0.12)" }}>
+      <div style={{ padding: "40px clamp(32px, 9vw, 160px) 60px", borderTop: "1px solid rgba(43,37,32,0.12)" }}>
         <BackButtonFull backUrl={backUrl} />
       </div>
     </>
