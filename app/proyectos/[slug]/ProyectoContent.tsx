@@ -26,13 +26,15 @@ export default function ProyectoContent({ name, type, location, year, descriptio
     | { kind: "pair"; imgs: [ImageItem, ImageItem] }
     | { kind: "solo-v"; img: ImageItem };
 
+  const isVertical = (img: ImageItem) => img.aspectRatio < 1.05;
+
   const groups: Group[] = [];
   let i = 0;
   while (i < images.length) {
     const cur = images[i];
-    if (cur.aspectRatio < 1) {
+    if (isVertical(cur)) {
       const next = images[i + 1];
-      if (next && next.aspectRatio < 1) {
+      if (next && isVertical(next)) {
         groups.push({ kind: "pair", imgs: [cur, next] });
         i += 2;
       } else {
@@ -42,6 +44,19 @@ export default function ProyectoContent({ name, type, location, year, descriptio
     } else {
       groups.push({ kind: "single", img: cur });
       i += 1;
+    }
+  }
+
+  // Fusionar dos solo-v consecutivos que no se juntaron
+  const merged: Group[] = [];
+  let j = 0;
+  while (j < groups.length) {
+    if (groups[j].kind === "solo-v" && groups[j + 1]?.kind === "solo-v") {
+      merged.push({ kind: "pair", imgs: [(groups[j] as { kind: "solo-v"; img: ImageItem }).img, (groups[j + 1] as { kind: "solo-v"; img: ImageItem }).img] });
+      j += 2;
+    } else {
+      merged.push(groups[j]);
+      j++;
     }
   }
 
@@ -92,7 +107,7 @@ export default function ProyectoContent({ name, type, location, year, descriptio
 
       {/* Galería */}
       <div style={{ padding: "32px clamp(32px, 9vw, 160px) 100px" }}>
-        {groups.map((g, idx) => {
+        {merged.map((g, idx) => {
           if (g.kind === "single") {
             return (
               <div key={idx} style={{ width: "100%", marginBottom: "8px", overflow: "hidden" }}>
