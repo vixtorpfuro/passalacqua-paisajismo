@@ -35,6 +35,9 @@ export const proyectoType = defineType({
       title: 'Galería',
       type: 'array',
       of: [{ type: 'image', options: { hotspot: true } }],
+      options: {
+        layout: 'grid',
+      },
     }),
     defineField({
       name: 'description',
