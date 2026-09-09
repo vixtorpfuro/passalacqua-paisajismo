@@ -20,26 +20,31 @@ type Props = {
 export default function ProyectoContent({ name, type, location, year, description, images, backUrl }: Props) {
   const [infoOpen, setInfoOpen] = useState(false);
 
-  // Agrupar: verticales de a pares, horizontales solas
   type Group =
     | { kind: "single"; img: ImageItem }
+    | { kind: "trio"; imgs: [ImageItem, ImageItem, ImageItem] }
     | { kind: "pair"; imgs: [ImageItem, ImageItem] }
     | { kind: "solo-v"; img: ImageItem };
 
   const isVertical = (img: ImageItem) => img.aspectRatio < 1.05;
 
-  // Reordenar: cuando una vertical no tiene par inmediato, buscar la siguiente vertical
-  // en el resto del array y traerla para emparejarlas
+  // Agrupar verticales de a 3, buscando en el resto del array
   const pool = [...images];
   const merged: Group[] = [];
 
   while (pool.length > 0) {
     const cur = pool.shift()!;
     if (isVertical(cur)) {
-      const nextVertIdx = pool.findIndex((img) => isVertical(img));
-      if (nextVertIdx !== -1) {
-        const [partner] = pool.splice(nextVertIdx, 1);
-        merged.push({ kind: "pair", imgs: [cur, partner] });
+      const v1idx = pool.findIndex((img) => isVertical(img));
+      if (v1idx !== -1) {
+        const [v1] = pool.splice(v1idx, 1);
+        const v2idx = pool.findIndex((img) => isVertical(img));
+        if (v2idx !== -1) {
+          const [v2] = pool.splice(v2idx, 1);
+          merged.push({ kind: "trio", imgs: [cur, v1, v2] });
+        } else {
+          merged.push({ kind: "pair", imgs: [cur, v1] });
+        }
       } else {
         merged.push({ kind: "solo-v", img: cur });
       }
@@ -100,6 +105,17 @@ export default function ProyectoContent({ name, type, location, year, descriptio
             return (
               <div key={idx} style={{ width: "100%", marginBottom: "8px", overflow: "hidden" }}>
                 <img src={g.img.url} alt="" style={{ width: "100%", display: "block" }} />
+              </div>
+            );
+          }
+          if (g.kind === "trio") {
+            return (
+              <div key={idx} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", marginBottom: "8px" }}>
+                {g.imgs.map((img, j) => (
+                  <div key={j} style={{ overflow: "hidden", aspectRatio: "2/3" }}>
+                    <img src={img.url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </div>
+                ))}
               </div>
             );
           }
