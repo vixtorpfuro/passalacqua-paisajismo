@@ -28,35 +28,23 @@ export default function ProyectoContent({ name, type, location, year, descriptio
 
   const isVertical = (img: ImageItem) => img.aspectRatio < 1.05;
 
-  const groups: Group[] = [];
-  let i = 0;
-  while (i < images.length) {
-    const cur = images[i];
+  // Reordenar: cuando una vertical no tiene par inmediato, buscar la siguiente vertical
+  // en el resto del array y traerla para emparejarlas
+  const pool = [...images];
+  const merged: Group[] = [];
+
+  while (pool.length > 0) {
+    const cur = pool.shift()!;
     if (isVertical(cur)) {
-      const next = images[i + 1];
-      if (next && isVertical(next)) {
-        groups.push({ kind: "pair", imgs: [cur, next] });
-        i += 2;
+      const nextVertIdx = pool.findIndex((img) => isVertical(img));
+      if (nextVertIdx !== -1) {
+        const [partner] = pool.splice(nextVertIdx, 1);
+        merged.push({ kind: "pair", imgs: [cur, partner] });
       } else {
-        groups.push({ kind: "solo-v", img: cur });
-        i += 1;
+        merged.push({ kind: "solo-v", img: cur });
       }
     } else {
-      groups.push({ kind: "single", img: cur });
-      i += 1;
-    }
-  }
-
-  // Fusionar dos solo-v consecutivos que no se juntaron
-  const merged: Group[] = [];
-  let j = 0;
-  while (j < groups.length) {
-    if (groups[j].kind === "solo-v" && groups[j + 1]?.kind === "solo-v") {
-      merged.push({ kind: "pair", imgs: [(groups[j] as { kind: "solo-v"; img: ImageItem }).img, (groups[j + 1] as { kind: "solo-v"; img: ImageItem }).img] });
-      j += 2;
-    } else {
-      merged.push(groups[j]);
-      j++;
+      merged.push({ kind: "single", img: cur });
     }
   }
 
