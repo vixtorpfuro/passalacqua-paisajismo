@@ -131,8 +131,10 @@ export default function ProyectoContent({ name, type, location, year, descriptio
             );
           }
           return (
-            <div key={idx} style={{ width: "100%", marginBottom: "8px", overflow: "hidden" }}>
-              <img src={g.img.url} alt="" style={{ width: "100%", display: "block" }} />
+            <div key={idx} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px", marginBottom: "8px" }}>
+              <div style={{ overflow: "hidden", aspectRatio: "2/3" }}>
+                <img src={g.img.url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
             </div>
           );
         })}
