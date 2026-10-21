@@ -20,12 +20,7 @@ export default async function ProyectoPage({
 
   const backUrl = cat ? `/proyectos?cat=${encodeURIComponent(cat)}` : "/proyectos";
 
-  // Excluir la portada de la galería si aparece en images[]
-  const coverRef = proyecto.coverImage?.asset?._ref;
-  const galleryImages = (proyecto.images ?? []).filter(
-    (img) => !coverRef || img.asset?._ref !== coverRef
-  );
-  const images = galleryImages.map((img) => {
+  const images = (proyecto.images ?? []).map((img) => {
     const ar = img.dimensions?.aspectRatio ?? 1.5;
     const w = ar >= 1 ? 1600 : 900;
     return {
