@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import Script from "next/script";
 import { useState } from "react";
 
 export type LandingProyecto = {
@@ -14,6 +15,17 @@ export type LandingProyecto = {
 // Número que recibe las solicitudes de reunión por WhatsApp (formato internacional, sin + ni espacios)
 const WHATSAPP = "56995389616";
 const EMAIL = "oficina@passalacquapaisajismo.cl";
+// Copia de cada solicitud del formulario (FormSubmit; la primera vez pide activar desde el correo)
+const COPIA = "vpellegrini@furo.company";
+// Píxel de Meta: se activa cuando NEXT_PUBLIC_META_PIXEL_ID está definido en Vercel
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
+
+declare global {
+  interface Window { fbq?: (...args: unknown[]) => void }
+}
+function track(evento: "Contact" | "Lead", data?: Record<string, string>) {
+  try { window.fbq?.("track", evento, data); } catch {}
+}
 
 const DARK = "#2b2520";
 const CREAM = "#f2ede8";
@@ -54,6 +66,7 @@ function waLink(text: string) {
 export default function LandingClient({ proyectos }: { proyectos: LandingProyecto[] }) {
   const params = useSearchParams();
   const utm = (params.get("utm_content") || "").toLowerCase();
+  const origen = params.get("utm_source") ? `${params.get("utm_source")} · ${utm || "sin anuncio"}` : "web";
   const seg = SEGMENTOS.find((s) => s.id === utm) ?? null;
 
   const [nombre, setNombre] = useState("");
@@ -67,14 +80,41 @@ export default function LandingClient({ proyectos }: { proyectos: LandingProyect
     empresa && `Empresa: ${empresa}`,
     tipo && `Tipo: ${tipo}`,
     proyecto && `Proyecto: ${proyecto}`,
+    `Ref: ${origen}`,
   ]
     .filter(Boolean)
     .join("\n");
 
-  const waQuick = waLink("Hola, vi la campaña Jardín imposible y me gustaría agendar una reunión.");
+  const waQuick = waLink(`Hola, vi la campaña Jardín imposible y me gustaría agendar una reunión.\nRef: ${origen}`);
+
+  function enviarCopia() {
+    try {
+      fetch(`https://formsubmit.co/ajax/${COPIA}`, {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Nueva solicitud Jardín imposible · ${nombre}${empresa ? " · " + empresa : ""}`,
+          _template: "table",
+          _captcha: "false",
+          Nombre: nombre,
+          Empresa: empresa || "—",
+          Tipo: tipo || "—",
+          Proyecto: proyecto || "—",
+          Origen: origen,
+          Fecha: new Date().toLocaleString("es-CL", { timeZone: "America/Santiago" }),
+        }),
+      }).catch(() => {});
+    } catch {}
+  }
 
   return (
     <div style={{ backgroundColor: CREAM, color: DARK, minHeight: "100vh", paddingBottom: 84 }}>
+      {PIXEL_ID && (
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${PIXEL_ID}');fbq('track','PageView');`}
+        </Script>
+      )}
       {/* Logo */}
       <header style={{ display: "flex", justifyContent: "center", padding: "18px 20px", borderBottom: "1px solid rgba(43,37,32,0.12)" }}>
         <Link href="/" aria-label="Passalacqua Paisajismo">
@@ -200,6 +240,8 @@ export default function LandingClient({ proyectos }: { proyectos: LandingProyect
               onSubmit={(e) => {
                 e.preventDefault();
                 window.open(waLink(mensaje), "_blank");
+                enviarCopia();
+                track("Lead", { content_name: utm || "web" });
               }}
               style={{ display: "grid", gap: 12 }}
             >
@@ -223,7 +265,7 @@ export default function LandingClient({ proyectos }: { proyectos: LandingProyect
                 ENVIAR POR WHATSAPP →
               </button>
             </form>
-            <a href={`mailto:${EMAIL}?subject=${encodeURIComponent("Reunión · Jardín imposible")}`} style={{ display: "block", textAlign: "center", marginTop: 16, fontSize: 13, color: CREAM, opacity: 0.8 }}>
+            <a onClick={() => track("Contact", { content_name: "email" })} href={`mailto:${EMAIL}?subject=${encodeURIComponent("Reunión · Jardín imposible")}`} style={{ display: "block", textAlign: "center", marginTop: 16, fontSize: 13, color: CREAM, opacity: 0.8 }}>
               o escríbenos a {EMAIL}
             </a>
           </div>
@@ -247,7 +289,7 @@ export default function LandingClient({ proyectos }: { proyectos: LandingProyect
         }}
       >
         <a href="#proyectos" style={{ ...btnSecondary, padding: "13px 8px" }}>VER PROYECTOS</a>
-        <a href={waQuick} target="_blank" rel="noopener noreferrer" style={{ ...btnPrimary, padding: "13px 8px" }}>AGENDAR REUNIÓN</a>
+        <a href={waQuick} onClick={() => track("Contact", { content_name: utm || "web" })} target="_blank" rel="noopener noreferrer" style={{ ...btnPrimary, padding: "13px 8px" }}>AGENDAR REUNIÓN</a>
       </div>
     </div>
   );
