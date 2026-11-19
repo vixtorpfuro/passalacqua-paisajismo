@@ -18,7 +18,7 @@ const EMAIL = "oficina@passalacquapaisajismo.cl";
 // Copia de cada solicitud del formulario (FormSubmit; la primera vez pide activar desde el correo)
 const COPIA = "vpellegrini@furo.company";
 // Píxel de Meta: se activa cuando NEXT_PUBLIC_META_PIXEL_ID está definido en Vercel
-const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "1652165873040981";
 
 declare global {
   interface Window { fbq?: (...args: unknown[]) => void }
